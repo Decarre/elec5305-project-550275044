@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Datasets and large generated artifacts
+data/audio/
+data/raw/
+models/
+checkpoints/
+*.wav
+*.flac
+*.mp3
+*.ogg
+*.pt
+*.pth
+*.ckpt
+
+# Local experiment tracking
+runs/
+wandb/
+
