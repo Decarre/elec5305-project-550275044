@@ -1,0 +1,17 @@
+sample_rate: 22050
+n_mels: 64
+n_fft: 2048
+hop_length: 512
+clip_duration: 10.0
+analysis_hop: 2.5
+target_instruments:
+  - drums
+  - bass
+  - guitar
+  - piano
+  - strings
+decision_threshold: 0.5
+smoothing_frames: 5
+minimum_event_duration: 1.0
+model_type: baseline
+

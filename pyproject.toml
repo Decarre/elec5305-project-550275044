@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "instrument-localization"
+version = "0.1.0"
+description = "Framework for attention-based temporal localization of musical instruments"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+  {name = "Ryan Hu"}
+]
+dependencies = [
+  "numpy>=1.21",
+  "PyYAML>=6.0"
+]
+
+[project.optional-dependencies]
+audio = [
+  "librosa>=0.10"
+]
+ml = [
+  "torch>=2.0"
+]
+dev = [
+  "pytest>=7.0"
+]
+
+[project.scripts]
+instrument-localization = "instrument_localization.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+

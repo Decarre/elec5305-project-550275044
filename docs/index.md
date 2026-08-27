@@ -1,6 +1,6 @@
 # Attention-Based Temporal Localization of Musical Instruments
 
-**Author: Decarre**
+**Author: Ryan Hu**
 
 ## Project proposal
 
@@ -39,9 +39,12 @@ The final system is intended to accept a music recording and generate:
 - Representative successful and unsuccessful predictions.
 - A summary of frequently confused instrument pairs.
 
+## Current implementation status
+
+An initial Python framework has been created for reproducible configuration, log-mel feature extraction, baseline temporal pooling, instrument-specific attention pooling, and conversion of frame probabilities into activity intervals. Unit tests cover the initial model interfaces and temporal post-processing. Model training and dataset experiments have not yet been completed.
+
 ## References
 
 1. E. J. Humphrey, S. Durand, and B. McFee, "OpenMIC-2018: An Open Dataset for Multiple Instrument Recognition," *Proceedings of ISMIR*, 2018. [Paper](https://archives.ismir.net/ismir2018/paper/000248.pdf)
 2. S. Gururani, M. Sharma, and A. Lerch, "An Attention Mechanism for Musical Instrument Recognition," *Proceedings of ISMIR*, 2019. [Paper](https://archives.ismir.net/ismir2019/paper/000007.pdf)
 3. R. Bittner, J. Salamon, M. Tierney, M. Mauch, C. Cannam, and J. P. Bello, "MedleyDB: A Multitrack Dataset for Annotation-Intensive MIR Research," *Proceedings of ISMIR*, 2014. [Dataset website](https://medleydb.weebly.com/)
-

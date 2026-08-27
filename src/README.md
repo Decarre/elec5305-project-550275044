@@ -1,6 +1,11 @@
 # Source code
 
-Reusable audio preprocessing, modelling, inference, temporal post-processing, and evaluation modules will be placed in this directory.
+The `instrument_localization` package contains the initial reusable framework:
 
-No implementation results are claimed at the proposal stage.
+- `config.py`: validated experiment settings and YAML loading.
+- `features.py`: audio loading and log-mel spectrogram extraction.
+- `models.py`: convolutional baseline and instrument-specific attention models.
+- `postprocess.py`: smoothing and activity-interval extraction.
+- `cli.py`: command-line configuration validation.
 
+The package provides interfaces for the planned experiments. It does not include trained weights or completed experimental results.
