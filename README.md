@@ -3,6 +3,15 @@
 **Author:** Ryan Hu
 **Status:** Project proposal and initial implementation framework
 
+## Student information
+
+- **Full name:** Ryan Hu
+- **Student ID (SID):** 550275044
+- **GitHub username:** Decarre
+- **GitHub repository:** <https://github.com/Decarre/elec5305-project-550275044>
+- **GitHub Project Site:** <https://decarre.github.io/elec5305-project-550275044/>
+- **Project proposal PDF:** [ELEC5305_Project_Proposal_550275044.pdf](ELEC5305_Project_Proposal_550275044.pdf)
+
 ## Overview
 
 This project investigates whether an attention-based multi-label audio classification model can identify musical instruments in polyphonic music and estimate their entry and exit times.

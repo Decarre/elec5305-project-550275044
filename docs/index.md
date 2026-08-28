@@ -2,6 +2,14 @@
 
 **Author: Ryan Hu**
 
+## Student information
+
+- **Full name:** Ryan Hu
+- **Student ID (SID):** 550275044
+- **GitHub username:** Decarre
+- **GitHub repository:** [elec5305-project-550275044](https://github.com/Decarre/elec5305-project-550275044)
+- **Formal proposal PDF:** [ELEC5305 Project Proposal](https://github.com/Decarre/elec5305-project-550275044/blob/main/ELEC5305_Project_Proposal_550275044.pdf)
+
 ## Project proposal
 
 Musical instrument recognition becomes difficult when several instruments are active at the same time. A conventional classifier may identify the instruments present in an entire audio clip but does not necessarily explain when each instrument enters or exits.
