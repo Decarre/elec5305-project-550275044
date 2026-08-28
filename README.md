@@ -99,7 +99,7 @@ The project currently has three main challenges:
 2. **Reliability of attention for temporal localisation.** Attention may highlight contextual or correlated sounds rather than the true activity of a target instrument. The attention curves will be compared with frame-level reference activations and with a global-pooling baseline instead of being treated as explanations by default.
 3. **Sensitivity of temporal post-processing and evaluation.** Activity intervals depend on probability thresholds, smoothing, minimum-duration rules, and event-matching tolerances. These settings will be selected using validation data, and their effects will be reported through ablation and sensitivity analysis.
 
-Teaching staff feedback on the feasibility of these planned controls and on which risk should be prioritised would be particularly useful.
+These challenges will be addressed during dataset preparation, model development, and evaluation. Teaching staff feedback will be used to refine the project scope and methodology as the project progresses.
 
 ### Quick start
 
