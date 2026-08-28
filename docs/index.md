@@ -52,13 +52,15 @@ The final system is intended to accept a music recording and generate:
 
 An initial Python framework has been created for reproducible configuration, log-mel feature extraction, baseline temporal pooling, instrument-specific attention pooling, and conversion of frame probabilities into activity intervals. Unit tests cover the initial model interfaces and temporal post-processing. Model training and dataset experiments have not yet been completed.
 
-## Feedback requested
+## Current challenges and points for feedback
 
-Teaching staff feedback would be particularly useful on the following points:
+The project currently has three main challenges:
 
-1. Is restricting the initial experiment to approximately five instrument families a feasible and sufficiently challenging scope?
-2. Is instrument-specific temporal attention an appropriate approach for estimating entry and exit times from weak clip-level labels?
-3. Are frame-level F1, event-level F1, and onset/offset timing errors sufficient for evaluating temporal localisation?
+1. **Dataset coverage and class imbalance.** Some instrument families may have too few independent recordings for reliable training and evaluation. The final set of approximately five target families will therefore be selected only after a class-frequency and recording-level audit.
+2. **Reliability of attention for temporal localisation.** Attention may highlight contextual or correlated sounds rather than the true activity of a target instrument. The attention curves will be compared with frame-level reference activations and with a global-pooling baseline instead of being treated as explanations by default.
+3. **Sensitivity of temporal post-processing and evaluation.** Activity intervals depend on probability thresholds, smoothing, minimum-duration rules, and event-matching tolerances. These settings will be selected using validation data, and their effects will be reported through ablation and sensitivity analysis.
+
+Teaching staff feedback on the feasibility of these planned controls and on which risk should be prioritised would be particularly useful.
 
 ## References
 
