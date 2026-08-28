@@ -10,7 +10,8 @@
 - **GitHub username:** Decarre
 - **GitHub repository:** <https://github.com/Decarre/elec5305-project-550275044>
 - **GitHub Project Site:** <https://decarre.github.io/elec5305-project-550275044/>
-- **Project proposal PDF:** [ELEC5305_Project_Proposal_550275044.pdf](ELEC5305_Project_Proposal_550275044.pdf)
+- **Project feedback submission PDF:** [ELEC5305_Project_Feedback_Submission_550275044.pdf](ELEC5305_Project_Feedback_Submission_550275044.pdf)
+- **Full proposal PDF:** [ELEC5305_Project_Proposal_550275044.pdf](ELEC5305_Project_Proposal_550275044.pdf)
 
 ## Overview
 
@@ -90,6 +91,14 @@ The repository now contains a small implementation framework for the planned exp
 
 This framework defines the experiment interfaces but does not include a trained model or claim experimental results.
 
+## Feedback requested
+
+Teaching staff feedback would be particularly useful on the following points:
+
+1. Is restricting the initial experiment to approximately five instrument families a feasible and sufficiently challenging scope?
+2. Is instrument-specific temporal attention an appropriate approach for estimating entry and exit times from weak clip-level labels?
+3. Are frame-level F1, event-level F1, and onset/offset timing errors sufficient for evaluating temporal localisation?
+
 ### Quick start
 
 Create a Python environment and install the project in editable mode:
@@ -126,6 +135,8 @@ Audio datasets, trained model files, and other large generated artifacts will no
 
 ## References
 
-1. E. J. Humphrey, S. Durand, and B. McFee, "OpenMIC-2018: An Open Dataset for Multiple Instrument Recognition," *Proceedings of ISMIR*, 2018. <https://archives.ismir.net/ismir2018/paper/000248.pdf>
-2. S. Gururani, M. Sharma, and A. Lerch, "An Attention Mechanism for Musical Instrument Recognition," *Proceedings of ISMIR*, 2019. <https://archives.ismir.net/ismir2019/paper/000007.pdf>
-3. R. Bittner, J. Salamon, M. Tierney, M. Mauch, C. Cannam, and J. P. Bello, "MedleyDB: A Multitrack Dataset for Annotation-Intensive MIR Research," *Proceedings of ISMIR*, 2014. <https://medleydb.weebly.com/>
+1. R. M. Bittner, J. Salamon, M. Tierney, M. Mauch, C. Cannam, and J. P. Bello, "MedleyDB: A multitrack dataset for annotation-intensive MIR research," in *Proc. 15th Int. Soc. Music Inf. Retrieval Conf. (ISMIR)*, Taipei, Taiwan, 2014, pp. 155-160. [Online]. Available: <https://doi.org/10.5281/zenodo.1417889>
+2. E. J. Humphrey, S. Durand, and B. McFee, "OpenMIC-2018: An open dataset for multiple instrument recognition," in *Proc. 19th Int. Soc. Music Inf. Retrieval Conf. (ISMIR)*, Paris, France, 2018, pp. 438-444. [Online]. Available: <https://archives.ismir.net/ismir2018/paper/000248.pdf>
+3. S. Gururani, M. Sharma, and A. Lerch, "An attention mechanism for musical instrument recognition," in *Proc. 20th Int. Soc. Music Inf. Retrieval Conf. (ISMIR)*, Delft, The Netherlands, 2019, pp. 83-90. [Online]. Available: <https://archives.ismir.net/ismir2019/paper/000007.pdf>
+4. C. Wang, G. Richard, and B. McFee, "Transfer learning and bias correction with pre-trained audio embeddings," in *Proc. 24th Int. Soc. Music Inf. Retrieval Conf. (ISMIR)*, Milan, Italy, 2023, pp. 64-70. [Online]. Available: <https://archives.ismir.net/ismir2023/paper/000006.pdf>
+5. L. Ou, Y. Takahashi, and Y. Wang, "Lead instrument detection from multitrack music," in *Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP)*, 2025, pp. 1-5, doi: 10.1109/ICASSP49660.2025.10889928. [Online]. Available: <https://doi.org/10.1109/ICASSP49660.2025.10889928>
