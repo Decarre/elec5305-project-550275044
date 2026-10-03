@@ -34,7 +34,7 @@ Acceptance gate:
 
 ## Phase 2: manifests and leakage barriers
 
-**Status:** pending.
+**Status:** implemented locally after the Phase 1 checkpoint; commit after tests.
 
 Deliverables:
 
@@ -44,6 +44,8 @@ Deliverables:
 - A single target-family list and column order written into every manifest.
 - Checks for missing WAVs, duplicated track IDs, artist leakage, annotation coverage and class coverage.
 - Saved split summary with a stable manifest hash.
+
+Implementation note: the manifest contains paths, windows and clip-level identity only. Temporal reference arrays remain in the evaluation path and are not fields in `ClipManifestRow`.
 
 Acceptance gate:
 
@@ -132,4 +134,4 @@ These begin only after the main weak-supervision experiment is complete.
 ## Checkpoint log
 
 - 2026-10-04: Project Feedback Two site and two-song engineering pilot already published in commit `7207229`.
-- 2026-10-04: Phase 1 implemented locally; 10 tests pass. Commit hash to be recorded after checkpoint creation.
+- 2026-10-04: Phase 1 committed and pushed as `d8ef6b3`; 10 tests pass.
