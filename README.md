@@ -119,6 +119,28 @@ Validate and display the default experiment configuration:
 python -m instrument_localization --config configs/attention.yaml --dry-run
 ```
 
+The same validation is available through the structured CLI:
+
+```bash
+python -m instrument_localization validate --config configs/attention.yaml
+```
+
+After leakage-safe manifests and feature arrays have been produced, train with
+clip-level labels and select the best epoch/thresholds on validation data:
+
+```bash
+python -m instrument_localization train --config configs/attention.yaml --train-data path/to/train.npz --validation-data path/to/validation.npz --output-dir runs/attention
+```
+
+The NPZ files contain `features` shaped `[clips, mel, time]` and clip-level
+`labels` shaped `[clips, classes]`. Temporal reference arrays are deliberately
+absent from this training interface. Evaluate once with the thresholds frozen
+inside the selected checkpoint:
+
+```bash
+python -m instrument_localization evaluate --checkpoint runs/attention/best_checkpoint.pt --data path/to/test.npz --output-json runs/attention/test_metrics.json
+```
+
 Run the initial tests:
 
 ```bash
@@ -131,6 +153,13 @@ Reproduce the metadata audit and public-sample checks after obtaining the offici
 python scripts/audit_medleydb.py --reference-root path/to/medleydb --output-dir results/metadata_audit
 python scripts/audit_medleydb_sample.py --sample-root path/to/MedleyDB_sample --output-dir results/sample_audit
 python scripts/run_sample_pilot.py --sample-root path/to/MedleyDB_sample --output-dir results/sample_pilot --epochs 25 --seed 5305
+```
+
+Build track/clip manifests after the artist split, using `--engineering-sample`
+only for the two-song public sample:
+
+```bash
+python scripts/build_manifests.py --tracks-csv results/metadata_audit/tracks.csv --audio-root path/to/audio --reference-root path/to/medleydb --output-dir path/to/manifests
 ```
 
 ## Repository structure

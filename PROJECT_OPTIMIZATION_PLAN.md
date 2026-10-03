@@ -55,7 +55,7 @@ Acceptance gate:
 
 ## Phase 3: training and validation CLI
 
-**Status:** training/checkpoint engine implemented locally; CLI wiring pending.
+**Status:** training/checkpoint engine and NPZ train/evaluate CLI implemented locally; full test gate and checkpoint commit pending.
 
 Deliverables:
 
@@ -135,3 +135,5 @@ These begin only after the main weak-supervision experiment is complete.
 
 - 2026-10-04: Project Feedback Two site and two-song engineering pilot already published in commit `7207229`.
 - 2026-10-04: Phase 1 committed and pushed as `d8ef6b3`; 10 tests pass.
+- 2026-10-04: Phase 2 committed and pushed as `172c04b`; public-sample manifest smoke test found 2/2 mixes and 2/2 activation files while keeping `generalisation_valid=false`.
+- 2026-10-04: Phase 3 training/checkpoint engine committed and pushed as `233f330`; validation thresholds are stored in the checkpoint and reused unchanged for evaluation.
