@@ -24,6 +24,12 @@ class ExperimentConfig:
     smoothing_frames: int = 5
     minimum_event_duration: float = 1.0
     model_type: str = "attention"
+    hidden_size: int = 128
+    batch_size: int = 32
+    epochs: int = 50
+    learning_rate: float = 0.001
+    seed: int = 5305
+    reporting_grid_seconds: float = 0.5
 
     def validate(self) -> "ExperimentConfig":
         if self.sample_rate <= 0:
@@ -42,8 +48,12 @@ class ExperimentConfig:
             raise ValueError("smoothing_frames must be a positive odd integer")
         if self.minimum_event_duration < 0:
             raise ValueError("minimum_event_duration cannot be negative")
-        if self.model_type not in {"baseline", "attention"}:
-            raise ValueError("model_type must be 'baseline' or 'attention'")
+        if self.model_type not in {"baseline", "max", "attention"}:
+            raise ValueError("model_type must be 'baseline', 'max' or 'attention'")
+        if self.hidden_size <= 0 or self.batch_size <= 0 or self.epochs <= 0:
+            raise ValueError("training dimensions must be positive")
+        if self.learning_rate <= 0 or self.reporting_grid_seconds <= 0:
+            raise ValueError("learning rate and reporting grid must be positive")
         return self
 
     def to_dict(self) -> Dict[str, Any]:

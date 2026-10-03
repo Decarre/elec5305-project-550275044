@@ -32,7 +32,7 @@ class FrameEncoder(nn.Module):
 
 
 class BaselineInstrumentModel(nn.Module):
-    """Global-mean-pooling baseline for clip-level prediction."""
+    """Controlled global-mean baseline operating on frame probabilities."""
 
     def __init__(self, n_mels: int, num_instruments: int, hidden_size: int = 128) -> None:
         super().__init__()
@@ -42,8 +42,37 @@ class BaselineInstrumentModel(nn.Module):
     def forward(self, spectrogram: Tensor) -> Dict[str, Tensor]:
         frame_features = self.encoder(spectrogram)
         frame_logits = self.classifier(frame_features)
-        clip_logits = frame_logits.mean(dim=1)
-        return {"clip_logits": clip_logits, "frame_logits": frame_logits}
+        frame_probabilities = torch.sigmoid(frame_logits)
+        clip_probabilities = frame_probabilities.mean(dim=1)
+        clip_logits = torch.logit(clip_probabilities.clamp(1e-7, 1.0 - 1e-7))
+        return {
+            "clip_logits": clip_logits,
+            "frame_logits": frame_logits,
+            "frame_probabilities": frame_probabilities,
+            "clip_probabilities": clip_probabilities,
+        }
+
+
+class MaxInstrumentModel(nn.Module):
+    """Optional global-max baseline using the same encoder and classifier."""
+
+    def __init__(self, n_mels: int, num_instruments: int, hidden_size: int = 128) -> None:
+        super().__init__()
+        self.encoder = FrameEncoder(n_mels, hidden_size)
+        self.classifier = nn.Linear(hidden_size, num_instruments)
+
+    def forward(self, spectrogram: Tensor) -> Dict[str, Tensor]:
+        frame_features = self.encoder(spectrogram)
+        frame_logits = self.classifier(frame_features)
+        frame_probabilities = torch.sigmoid(frame_logits)
+        clip_probabilities = frame_probabilities.max(dim=1).values
+        clip_logits = torch.logit(clip_probabilities.clamp(1e-7, 1.0 - 1e-7))
+        return {
+            "clip_logits": clip_logits,
+            "frame_logits": frame_logits,
+            "frame_probabilities": frame_probabilities,
+            "clip_probabilities": clip_probabilities,
+        }
 
 
 class AttentionInstrumentModel(nn.Module):

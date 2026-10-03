@@ -5,6 +5,7 @@ torch = pytest.importorskip("torch")
 from instrument_localization.models import (  # noqa: E402
     AttentionInstrumentModel,
     BaselineInstrumentModel,
+    MaxInstrumentModel,
 )
 
 
@@ -13,6 +14,20 @@ def test_baseline_output_shapes():
     output = model(torch.randn(2, 64, 40))
     assert output["clip_logits"].shape == (2, 5)
     assert output["frame_logits"].shape == (2, 40, 5)
+    assert torch.allclose(
+        output["clip_probabilities"], output["frame_probabilities"].mean(dim=1)
+    )
+    assert torch.allclose(
+        torch.sigmoid(output["clip_logits"]), output["clip_probabilities"], atol=1e-6
+    )
+
+
+def test_max_pooling_uses_frame_probabilities():
+    model = MaxInstrumentModel(n_mels=64, num_instruments=5)
+    output = model(torch.randn(2, 64, 40))
+    assert torch.allclose(
+        output["clip_probabilities"], output["frame_probabilities"].max(dim=1).values
+    )
 
 
 def test_attention_weights_sum_over_time():

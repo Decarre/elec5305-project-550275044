@@ -14,4 +14,10 @@ decision_threshold: 0.5
 smoothing_frames: 5
 minimum_event_duration: 1.0
 model_type: attention
+hidden_size: 128
+batch_size: 32
+epochs: 50
+learning_rate: 0.001
+seed: 5305
+reporting_grid_seconds: 0.5
 
