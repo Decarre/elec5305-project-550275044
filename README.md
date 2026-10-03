@@ -1,7 +1,7 @@
 # Attention-Based Temporal Localization of Musical Instruments
 
 **Author:** Ryan Hu
-**Status:** Project proposal and initial implementation framework
+**Status:** Preliminary implementation, dataset audit and two-song engineering pilot completed (4 October 2026)
 
 ## Student information
 
@@ -21,7 +21,7 @@ The planned system will accept a music recording and produce an instrument activ
 
 ## Research question
 
-> Can an attention-based multi-label model localize musical instrument activity and estimate instrument entry and exit times when trained using only clip-level instrument labels?
+> When trained using only clip-level instrument labels, how accurately do frame-level class scores and instrument-specific attention signals recover the true temporal activity of instruments in polyphonic music?
 
 The project also investigates two supporting questions:
 
@@ -43,8 +43,8 @@ The project also investigates two supporting questions:
 2. Convert the audio into log-mel spectrograms.
 3. Implement a baseline convolutional model with global temporal pooling.
 4. Implement an instrument-specific attention model.
-5. Convert frame-level scores or attention weights into activity intervals using thresholding and temporal smoothing.
-6. Compare predicted activity intervals with reference instrument activations.
+5. Evaluate frame-level class scores and time-normalised attention weights as separate localisation signals.
+6. Select thresholds and post-processing using validation artists only, then compare with held-out reference activations.
 7. Analyse instrument-specific errors and recurring confusion patterns.
 
 ## Evaluation
@@ -59,7 +59,7 @@ The planned evaluation includes:
 - Per-label binary confusion matrices.
 - Pairwise error and instrument co-occurrence analysis.
 
-Attention values will be treated as candidate localization signals and evaluated against time-aligned annotations. They will not be assumed to provide reliable temporal explanations without quantitative validation.
+Frame class scores will be treated as candidate activity estimates. Attention weights are relative contributions that sum to one over time for each class; they are not activity probabilities and will be evaluated separately.
 
 ## Expected output
 
@@ -78,28 +78,32 @@ MedleyDB is the primary candidate because it provides polyphonic mixes, stems, i
 
 The final target classes and dataset split will be selected only after measuring class frequency and checking that each class has sufficient independent recordings for training, validation, and testing.
 
-## Initial implementation framework
+## Progress to date
 
-The repository now contains a small implementation framework for the planned experiments:
+The repository now contains a reproducible implementation and preliminary evidence:
 
 - A validated experiment configuration object.
 - Audio loading and log-mel feature extraction entry points.
 - A convolutional encoder with global-mean and instrument-specific attention pooling models.
+- AttentionMIC-style aggregation with separate frame scores, attention weights and clip probabilities.
 - Temporal smoothing and conversion from frame probabilities to activity intervals.
 - A dry-run command-line interface.
-- Unit tests for configuration, model output shapes, and temporal post-processing.
+- Unit tests for configuration, model output shapes, attention normalisation and temporal post-processing (**5/5 passing**).
+- A metadata audit of the official MedleyDB v1/v2 lists: **196 tracks, 116 artists**, and **117 tracks** with matching v2 activation-confidence files.
+- Audio/annotation alignment checks on both tracks in the official public sample; all eight expected instrument stems match annotation columns.
+- A 230-clip, two-song training-set sanity check for mean and attention pooling.
 
-This framework defines the experiment interfaces but does not include a trained model or claim experimental results.
+The two-song run is an engineering overfit check: it verifies that both weak-label training paths execute and reduce loss, but it has no held-out artists and makes no generalisation claim. Full tables, figures, commands and limitations are on the [GitHub Project Site](https://decarre.github.io/elec5305-project-550275044/).
 
 ## Current challenges and points for feedback
 
 The project currently has three main challenges:
 
-1. **Dataset coverage and class imbalance.** Some instrument families may have too few independent recordings for reliable training and evaluation. The final set of approximately five target families will therefore be selected only after a class-frequency and recording-level audit.
+1. **Dataset coverage and class imbalance.** The audit shows that strings have much weaker activity-reference coverage than drums, bass, guitar and piano. The final target list and artist split will be revised after the full audio is available.
 2. **Reliability of attention for temporal localisation.** Attention may highlight contextual or correlated sounds rather than the true activity of a target instrument. The attention curves will be compared with frame-level reference activations and with a global-pooling baseline instead of being treated as explanations by default.
 3. **Sensitivity of temporal post-processing and evaluation.** Activity intervals depend on probability thresholds, smoothing, minimum-duration rules, and event-matching tolerances. These settings will be selected using validation data, and their effects will be reported through ablation and sensitivity analysis.
 
-These challenges will be addressed iteratively during dataset preparation, model development, and evaluation. The project scope and methodology will be refined as new evidence becomes available.
+The next valid performance experiment requires the full MedleyDB audio. It will split artists before clipping, tune all thresholds on validation data, and reserve held-out artists for the reported clip and frame metrics.
 
 ### Quick start
 
@@ -121,6 +125,14 @@ Run the initial tests:
 pytest
 ```
 
+Reproduce the metadata audit and public-sample checks after obtaining the official resources separately:
+
+```bash
+python scripts/audit_medleydb.py --reference-root path/to/medleydb --output-dir results/metadata_audit
+python scripts/audit_medleydb_sample.py --sample-root path/to/MedleyDB_sample --output-dir results/sample_audit
+python scripts/run_sample_pilot.py --sample-root path/to/MedleyDB_sample --output-dir results/sample_pilot --epochs 25 --seed 5305
+```
+
 ## Repository structure
 
 ```text
@@ -131,6 +143,7 @@ notebooks/  Reproducible exploration and experiments
 results/    Generated figures, tables, and example timelines
 src/        Reusable preprocessing, modelling, and evaluation code
 tests/      Unit tests for reusable project components
+scripts/    Reproducible dataset audits and preliminary experiments
 ```
 
 Audio datasets, trained model files, and other large generated artifacts will not be committed directly to the repository.
@@ -142,3 +155,6 @@ Audio datasets, trained model files, and other large generated artifacts will no
 3. S. Gururani, M. Sharma, and A. Lerch, "An attention mechanism for musical instrument recognition," in *Proc. 20th Int. Soc. Music Inf. Retrieval Conf. (ISMIR)*, Delft, The Netherlands, 2019, pp. 83-90. [Online]. Available: <https://archives.ismir.net/ismir2019/paper/000007.pdf>
 4. C. Wang, G. Richard, and B. McFee, "Transfer learning and bias correction with pre-trained audio embeddings," in *Proc. 24th Int. Soc. Music Inf. Retrieval Conf. (ISMIR)*, Milan, Italy, 2023, pp. 64-70. [Online]. Available: <https://archives.ismir.net/ismir2023/paper/000006.pdf>
 5. L. Ou, Y. Takahashi, and Y. Wang, "Lead instrument detection from multitrack music," in *Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP)*, 2025, pp. 1-5, doi: 10.1109/ICASSP49660.2025.10889928. [Online]. Available: <https://doi.org/10.1109/ICASSP49660.2025.10889928>
+6. A. Kumar and B. Raj, "Audio event detection using weakly labeled data," in *Proc. ACM Multimedia*, 2016. [Online]. Available: <https://arxiv.org/abs/1605.02401>
+7. Q. Kong, Y. Xu, W. Wang, and M. D. Plumbley, "Audio Set classification with attention model: A probabilistic perspective," in *Proc. ICASSP*, 2018. [Online]. Available: <https://arxiv.org/abs/1711.00927>
+8. S. Jain and B. C. Wallace, "Attention is not Explanation," in *Proc. NAACL-HLT*, 2019. [Online]. Available: <https://aclanthology.org/N19-1357/>

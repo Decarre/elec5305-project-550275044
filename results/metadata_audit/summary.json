@@ -1,0 +1,19 @@
+{
+  "source": "marl/medleydb official v1/v2 track lists and metadata",
+  "reference_commit": "537bb7bad0601fc58e4fff8404f71658b86ef60e",
+  "tracks": 196,
+  "artists": 116,
+  "activation_confidence_v2_files": 117,
+  "planned_split_tracks": {
+    "validation": 33,
+    "train": 136,
+    "test": 27
+  },
+  "planned_split_artists": {
+    "train": 85,
+    "validation": 11,
+    "test": 20
+  },
+  "audio_audited": false,
+  "note": "Stem metadata gives song-level candidate labels; no clip-level labels or audio checks are claimed."
+}

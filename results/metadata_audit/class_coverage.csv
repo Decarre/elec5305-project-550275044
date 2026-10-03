@@ -1,0 +1,6 @@
+family,tracks,artists,annotated_tracks,annotated_artists,train_tracks,validation_tracks,test_tracks,train_artists,validation_artists,test_artists,validation_annotated_tracks,test_annotated_tracks,train_annotated_artists,validation_annotated_artists,test_annotated_artists
+drums,123,87,94,74,82,22,19,62,9,16,16,18,51,7,16
+bass,122,91,90,74,85,20,17,66,10,15,14,17,51,8,15
+guitar,93,70,68,59,68,13,12,51,7,12,9,12,41,6,12
+piano,86,51,46,34,48,20,18,34,6,11,9,9,24,3,7
+strings,55,30,23,17,42,7,6,23,2,5,6,2,14,1,2

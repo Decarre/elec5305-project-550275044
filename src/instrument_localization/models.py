@@ -58,11 +58,19 @@ class AttentionInstrumentModel(nn.Module):
     def forward(self, spectrogram: Tensor) -> Dict[str, Tensor]:
         frame_features = self.encoder(spectrogram)
         frame_logits = self.frame_classifier(frame_features)
-        attention_weights = torch.softmax(self.attention(frame_features), dim=1)
-        clip_logits = (attention_weights * frame_logits).sum(dim=1)
+        # Match the published AttentionMIC aggregation: bounded class scores
+        # weighted by non-negative, time-normalised per-class attention.
+        # Attention is relative importance across this clip, not P(active|t).
+        raw_attention = torch.sigmoid(self.attention(frame_features))
+        attention_weights = raw_attention / raw_attention.sum(dim=1, keepdim=True).clamp_min(1e-7)
+        frame_probabilities = torch.sigmoid(frame_logits)
+        clip_probabilities = (attention_weights * frame_probabilities).sum(dim=1)
+        clip_logits = torch.logit(clip_probabilities.clamp(1e-7, 1.0 - 1e-7))
         return {
             "clip_logits": clip_logits,
             "frame_logits": frame_logits,
+            "frame_probabilities": frame_probabilities,
+            "clip_probabilities": clip_probabilities,
             "attention_weights": attention_weights,
         }
 

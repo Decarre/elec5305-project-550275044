@@ -1,0 +1,7 @@
+model,class,positive_clips,precision,recall,f1
+mean,guitar,230,1.0,1.0,1.0
+mean,strings,88,1.0,1.0,1.0
+mean,vocals,123,0.9919354838709677,1.0,0.9959514170040485
+attention,guitar,230,1.0,1.0,1.0
+attention,strings,88,1.0,0.9886363636363636,0.9942857142857142
+attention,vocals,123,0.9919354838709677,1.0,0.9959514170040485

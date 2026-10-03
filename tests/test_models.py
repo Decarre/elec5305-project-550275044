@@ -22,4 +22,7 @@ def test_attention_weights_sum_over_time():
     assert output["attention_weights"].shape == (2, 40, 5)
     expected = torch.ones(2, 5)
     assert torch.allclose(output["attention_weights"].sum(dim=1), expected, atol=1e-5)
+    reconstructed = (output["attention_weights"] * output["frame_probabilities"]).sum(dim=1)
+    assert torch.allclose(output["clip_probabilities"], reconstructed, atol=1e-6)
+    assert torch.allclose(torch.sigmoid(output["clip_logits"]), reconstructed, atol=1e-6)
 

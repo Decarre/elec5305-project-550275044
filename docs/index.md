@@ -1,71 +1,133 @@
-# Attention-Based Temporal Localization of Musical Instruments
+# Weakly Supervised Temporal Localisation of Musical Instruments
 
-**Author: Ryan Hu**
+**Ryan Hu · SID 550275044 · progress update: 4 October 2026**
 
-## Student information
-
-- **Full name:** Ryan Hu
-- **Student ID (SID):** 550275044
-- **GitHub username:** Decarre
-- **GitHub repository:** [elec5305-project-550275044](https://github.com/Decarre/elec5305-project-550275044)
-- **Project feedback submission PDF:** [Brief Project Description](https://github.com/Decarre/elec5305-project-550275044/blob/main/ELEC5305_Project_Feedback_Submission_550275044.pdf)
-- **Full proposal PDF:** [ELEC5305 Project Proposal](https://github.com/Decarre/elec5305-project-550275044/blob/main/ELEC5305_Project_Proposal_550275044.pdf)
-
-## Project proposal
-
-Musical instrument recognition becomes difficult when several instruments are active at the same time. A conventional classifier may identify the instruments present in an entire audio clip but does not necessarily explain when each instrument enters or exits.
-
-This project investigates an attention-based multi-label model for recognizing and temporally localizing instruments in polyphonic music. The intended output is an instrument activity timeline that displays the predicted entry and exit times of each target instrument.
+[Repository](https://github.com/Decarre/elec5305-project-550275044) · [original proposal PDF](https://github.com/Decarre/elec5305-project-550275044/blob/main/ELEC5305_Project_Proposal_550275044.pdf)
 
 ## Research question
 
-> Can an attention-based multi-label model localize musical instrument activity and estimate instrument entry and exit times when trained using only clip-level instrument labels?
+> When trained using only clip-level instrument labels, how accurately do frame-level class scores and instrument-specific attention signals recover the true temporal activity of instruments in polyphonic music?
 
-The project will also examine whether attention-based pooling improves upon a conventional global-pooling baseline and which instruments are most frequently confused by the model.
+The controlled comparison will use one shared frame encoder and change only the temporal aggregation: global mean pooling versus instrument-specific attention pooling. Both clip-level recognition and frame-level localisation will be evaluated.
 
-## Approach
+This wording reflects an important distinction raised in feedback. A frame class score is a candidate estimate of activity at one time. An attention weight is a relative contribution to the clip decision and is normalised across time for each class. It is therefore not an activity probability. The project will evaluate frame scores, attention weights, and optionally their product as separate signals.
 
-Audio recordings will first be represented as log-mel spectrograms. A convolutional baseline using global temporal pooling will be implemented and compared with an instrument-specific attention model. Frame-level model outputs will be converted into activity intervals using a defined threshold and temporal smoothing.
+## System design
 
-Approximately five common instrument families will be selected after examining the available data. MedleyDB is the primary candidate dataset because it provides polyphonic recordings, individual stems, instrument metadata, and time-aligned instrument activity annotations. During the weakly supervised experiment, only clip-level labels will be supplied during training. The time-aligned annotations will be reserved for evaluation.
+1. Audit MedleyDB metadata and select well-supported instrument families.
+2. Assign complete artists to train, validation, or test before making short clips.
+3. Extract 64-bin log-mel spectrograms from the audio.
+4. Train mean-pooling and AttentionMIC-style models using only clip-level multi-label targets.
+5. Choose class thresholds and temporal post-processing on validation data only.
+6. Freeze those choices, then compare clip-level recognition and frame-level localisation on held-out artists.
+7. Relate errors to class co-occurrence and inspect representative spectrogram/audio examples.
 
-## Experiments and evaluation
+MedleyDB stem activation confidence is reserved for temporal evaluation. These annotations are automatically derived from isolated stems, so they are useful references rather than perfect manual frame labels. Frame precision, recall and F1 at a stated time grid will be primary; event and onset/offset results will be secondary.
 
-The baseline and attention models will be compared using clip-level and frame-level precision, recall, micro-F1, macro-F1, and per-instrument F1. Temporal localization will be evaluated through instrument onset and offset errors and event-level F1 under a clearly defined timing tolerance.
+## Work completed to date
 
-The error analysis will include per-label binary confusion matrices, pairwise error patterns, instrument co-occurrence statistics, spectrograms, and representative audio examples. This analysis will investigate whether errors are associated with similar timbre, low source energy, or instruments that frequently occur together.
+### Published-code study and model implementation
 
-Attention weights will not automatically be treated as correct explanations. Their temporal locations will be compared quantitatively with the reference activation annotations.
+The project now uses the aggregation structure in the published [AttentionMIC implementation](https://github.com/SiddGururani/AttentionMIC): bounded frame class scores are combined with non-negative, class-specific attention weights normalised over time. The implementation exposes:
 
-## Planned demonstration
+- `frame_probabilities[t, c]`: candidate frame localisation scores;
+- `attention_weights[t, c]`: relative weights satisfying `sum_t weight[t,c] = 1`;
+- `clip_probabilities[c]`: the attention-weighted sum of frame scores.
 
-The final system is intended to accept a music recording and generate:
+The mean and attention models share the same convolutional frame encoder. Automated tests cover model shapes, attention normalisation, configuration validation and temporal post-processing; all **5 tests pass** in the current environment.
 
-- Predicted instrument labels.
-- Instrument-specific temporal probability or attention curves.
-- Estimated entry and exit times.
-- A visual instrument activity timeline.
-- Representative successful and unsuccessful predictions.
-- A summary of frequently confused instrument pairs.
+### MedleyDB metadata audit
 
-## Current implementation status
+The audit used the official MedleyDB v1/v2 track lists and metadata at `marl/medleydb` commit `537bb7b`. It found **196 tracks from 116 artists**. The checked-out annotation release contains version-2 activation-confidence files for **117 of these tracks**.
 
-An initial Python framework has been created for reproducible configuration, log-mel feature extraction, baseline temporal pooling, instrument-specific attention pooling, and conversion of frame probabilities into activity intervals. Unit tests cover the initial model interfaces and temporal post-processing. Model training and dataset experiments have not yet been completed.
+| Candidate family | Tracks | Artists | Tracks with v2 activity reference | Artists with v2 activity reference |
+|---|---:|---:|---:|---:|
+| drums | 123 | 87 | 94 | 74 |
+| bass | 122 | 91 | 90 | 74 |
+| guitar | 93 | 70 | 68 | 59 |
+| piano | 86 | 51 | 46 | 34 |
+| strings | 55 | 30 | 23 | 17 |
 
-## Current challenges and points for feedback
+A deterministic artist-grouped draft split contains 136/33/27 tracks from 85/11/20 artists for train/validation/test. It is a planning result based on metadata and will be rechecked against downloaded audio and class balance before training. Strings are currently the weakest candidate: the draft split has only one validation artist and two test artists with an activity reference. The final class list or split therefore needs adjustment.
 
-The project currently has three main challenges:
+The audit also confirms strong co-occurrence: for example, drums and bass appear together in 105 tracks. This supports the planned analysis of whether a model uses a correlated instrument as evidence for the requested class.
 
-1. **Dataset coverage and class imbalance.** Some instrument families may have too few independent recordings for reliable training and evaluation. The final set of approximately five target families will therefore be selected only after a class-frequency and recording-level audit.
-2. **Reliability of attention for temporal localisation.** Attention may highlight contextual or correlated sounds rather than the true activity of a target instrument. The attention curves will be compared with frame-level reference activations and with a global-pooling baseline instead of being treated as explanations by default.
-3. **Sensitivity of temporal post-processing and evaluation.** Activity intervals depend on probability thresholds, smoothing, minimum-duration rules, and event-matching tolerances. These settings will be selected using validation data, and their effects will be reported through ablation and sensitivity analysis.
+[Metadata audit script](https://github.com/Decarre/elec5305-project-550275044/blob/main/scripts/audit_medleydb.py) · [class coverage CSV](https://github.com/Decarre/elec5305-project-550275044/blob/main/results/metadata_audit/class_coverage.csv) · [co-occurrence CSV](https://github.com/Decarre/elec5305-project-550275044/blob/main/results/metadata_audit/class_cooccurrence.csv)
 
-These challenges will be addressed iteratively during dataset preparation, model development, and evaluation. The project scope and methodology will be refined as new evidence becomes available.
+### Official sample audio and annotation QA
 
-## References
+The freely downloadable MedleyDB sample contains two songs from two artists. Both mixes are stereo at 44.1 kHz. The audit matched all **eight expected non-main-system stems** to their activation columns. Annotation frames are spaced by approximately **46.4 ms**, and each annotation ends within one frame of its mix.
 
-1. R. M. Bittner, J. Salamon, M. Tierney, M. Mauch, C. Cannam, and J. P. Bello, "MedleyDB: A multitrack dataset for annotation-intensive MIR research," in *Proc. 15th Int. Soc. Music Inf. Retrieval Conf. (ISMIR)*, Taipei, Taiwan, 2014, pp. 155-160. [Online]. Available: [https://doi.org/10.5281/zenodo.1417889](https://doi.org/10.5281/zenodo.1417889)
-2. E. J. Humphrey, S. Durand, and B. McFee, "OpenMIC-2018: An open dataset for multiple instrument recognition," in *Proc. 19th Int. Soc. Music Inf. Retrieval Conf. (ISMIR)*, Paris, France, 2018, pp. 438-444. [Online]. Available: [Paper](https://archives.ismir.net/ismir2018/paper/000248.pdf)
-3. S. Gururani, M. Sharma, and A. Lerch, "An attention mechanism for musical instrument recognition," in *Proc. 20th Int. Soc. Music Inf. Retrieval Conf. (ISMIR)*, Delft, The Netherlands, 2019, pp. 83-90. [Online]. Available: [Paper](https://archives.ismir.net/ismir2019/paper/000007.pdf)
-4. C. Wang, G. Richard, and B. McFee, "Transfer learning and bias correction with pre-trained audio embeddings," in *Proc. 24th Int. Soc. Music Inf. Retrieval Conf. (ISMIR)*, Milan, Italy, 2023, pp. 64-70. [Online]. Available: [Paper](https://archives.ismir.net/ismir2023/paper/000006.pdf)
-5. L. Ou, Y. Takahashi, and Y. Wang, "Lead instrument detection from multitrack music," in *Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP)*, 2025, pp. 1-5, doi: 10.1109/ICASSP49660.2025.10889928. [Online]. Available: [https://doi.org/10.1109/ICASSP49660.2025.10889928](https://doi.org/10.1109/ICASSP49660.2025.10889928)
+| Track | Mix duration | Metadata stems | Activity columns | Alignment result |
+|---|---:|---:|---:|---|
+| LizNelson_Rainfall | 284.91 s | 5 | 5 | matched |
+| Phoenix_ScotchMorris | 177.14 s | 4 (3 expected) | 3 | matched |
+
+The Phoenix metadata also includes a `Main System` stem, which is intentionally absent from the instrument-activity columns; the other three columns match acoustic guitar, flute and violin.
+
+![First 60 seconds of an official sample mix with stem-derived reference confidence](https://raw.githubusercontent.com/Decarre/elec5305-project-550275044/main/results/sample_audit/sample_alignment.png)
+
+[Sample QA script](https://github.com/Decarre/elec5305-project-550275044/blob/main/scripts/audit_medleydb_sample.py) · [track summary CSV](https://github.com/Decarre/elec5305-project-550275044/blob/main/results/sample_audit/tracks.csv) · [stem summary CSV](https://github.com/Decarre/elec5305-project-550275044/blob/main/results/sample_audit/stems.csv)
+
+### Two-song training sanity check
+
+An end-to-end engineering check was run on 230 non-overlapping two-second clips from the two official sample songs. Clip labels were produced from the withheld time series for preprocessing only: a class was marked present when its activation confidence was at least 0.5 for at least 10% of the clip. Both models received only the resulting clip-level vectors during training.
+
+| Model | Initial training BCE | Final training BCE | Training micro-F1 | Training macro-F1 |
+|---|---:|---:|---:|---:|
+| mean pooling | 0.4665 | 0.0142 | 0.9989 | 0.9987 |
+| attention pooling | 0.4509 | 0.0135 | 0.9977 | 0.9967 |
+
+These are **training-set overfit diagnostics**. Training and evaluation used the same two songs, guitar is positive in every clip, and only two artists are available. The values demonstrate that feature extraction, weak-label training and both aggregation paths run end to end; they do not estimate generalisation and cannot establish that one pooling method is better.
+
+The figure below illustrates why the temporal signals must be separated. The reference confidence, each model's frame score and the attention weight are different quantities. Although the model was given only a positive clip label, its frame score and attention may emphasize different parts of the clip.
+
+![Reference confidence, model frame scores and relative attention weight](https://raw.githubusercontent.com/Decarre/elec5305-project-550275044/main/results/sample_pilot/pilot_signals.png)
+
+[Sanity-check script](https://github.com/Decarre/elec5305-project-550275044/blob/main/scripts/run_sample_pilot.py) · [saved run summary](https://github.com/Decarre/elec5305-project-550275044/blob/main/results/sample_pilot/summary.json) · [per-class training metrics](https://github.com/Decarre/elec5305-project-550275044/blob/main/results/sample_pilot/training_metrics.csv)
+
+## Reproduction
+
+Install the project and optional audio/model dependencies in an isolated environment:
+
+```bash
+python -m pip install -e ".[dev,audio,ml]"
+python -m pytest
+```
+
+With a checkout of the official metadata tools and the separately downloaded official sample:
+
+```bash
+python scripts/audit_medleydb.py --reference-root path/to/medleydb --output-dir results/metadata_audit
+python scripts/audit_medleydb_sample.py --sample-root path/to/MedleyDB_sample --output-dir results/sample_audit
+python scripts/run_sample_pilot.py --sample-root path/to/MedleyDB_sample --output-dir results/sample_pilot --epochs 25 --seed 5305
+```
+
+The audio is excluded from Git. The repository contains scripts and derived summaries only.
+
+## Next experiment
+
+The next valid performance experiment requires the full MedleyDB audio. After access is available I will:
+
+1. verify every chosen track, duration and activity-reference file;
+2. revise the artist split so all selected families have credible validation/test support;
+3. create clips only after the artist split;
+4. train matched mean and attention models;
+5. select thresholds/smoothing on validation data and freeze them;
+6. report held-out clip and frame precision, recall and F1;
+7. evaluate frame scores and attention separately, then analyse co-occurrence and failure cases.
+
+OpenMIC remains useful for reproducing the published AttentionMIC recognition baseline, but cross-dataset transfer is an extension because it adds domain mismatch. A strongly supervised frame model is also an optional upper bound rather than the main weak-supervision experiment.
+
+## References and software resources
+
+1. R. M. Bittner et al., “MedleyDB: A Multitrack Dataset for Annotation-Intensive MIR Research,” ISMIR, 2014. [Paper and dataset](https://medleydb.weebly.com/)
+2. E. J. Humphrey, S. Durand, and B. McFee, “OpenMIC-2018: An Open Dataset for Multiple Instrument Recognition,” ISMIR, 2018. [Paper](https://archives.ismir.net/ismir2018/paper/000248.pdf)
+3. S. Gururani, M. Sharma, and A. Lerch, “An Attention Mechanism for Musical Instrument Recognition,” ISMIR, 2019. [Paper](https://archives.ismir.net/ismir2019/paper/000007.pdf)
+4. A. Kumar and B. Raj, “Audio Event Detection using Weakly Labeled Data,” ACM Multimedia, 2016. [Paper](https://arxiv.org/abs/1605.02401)
+5. Q. Kong, Y. Xu, W. Wang, and M. D. Plumbley, “Audio Set Classification with Attention Model: A Probabilistic Perspective,” ICASSP, 2018. [Paper](https://arxiv.org/abs/1711.00927)
+6. S. Jain and B. C. Wallace, “Attention is not Explanation,” NAACL, 2019. [Paper](https://aclanthology.org/N19-1357/)
+7. C. Wang, G. Richard, and B. McFee, “Transfer Learning and Bias Correction with Pre-trained Audio Embeddings,” ISMIR, 2023. [Paper](https://archives.ismir.net/ismir2023/paper/000006.pdf)
+8. L. Ou, Y. Takahashi, and Y. Wang, “Lead Instrument Detection from Multitrack Music,” ICASSP, 2025. [DOI](https://doi.org/10.1109/ICASSP49660.2025.10889928)
+
+Software used as references: [AttentionMIC](https://github.com/SiddGururani/AttentionMIC), [OpenMIC-2018 tools](https://github.com/cosmir/openmic-2018), and [MedleyDB annotations/tools](https://github.com/marl/medleydb).

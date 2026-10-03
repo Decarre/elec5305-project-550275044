@@ -1,0 +1,9 @@
+track_id,stem_id,instrument,family,duration_seconds,sample_rate_hz,active_fraction_at_0_5,mean_activation_confidence
+LizNelson_Rainfall,S01,female singer,other,284.9088,44100,0.80326,0.808108
+LizNelson_Rainfall,S02,female singer,other,284.9088,44100,0.357946,0.374531
+LizNelson_Rainfall,S03,female singer,other,284.9088,44100,0.482315,0.495182
+LizNelson_Rainfall,S04,acoustic guitar,guitar,284.9088,44100,0.997229,0.996741
+LizNelson_Rainfall,S05,clean electric guitar,guitar,284.9088,44100,0.374735,0.405806
+Phoenix_ScotchMorris,S01,acoustic guitar,guitar,177.1412,44100,0.989253,0.988359
+Phoenix_ScotchMorris,S02,flute,other,177.1412,44100,0.968283,0.959986
+Phoenix_ScotchMorris,S03,violin,strings,177.1412,44100,0.990564,0.984048

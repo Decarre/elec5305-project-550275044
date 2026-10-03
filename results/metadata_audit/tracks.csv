@@ -1,0 +1,197 @@
+track_id,artist,version,families,stem_instruments,activation_confidence_v2,planned_split
+AClassicEducation_NightOwl,A Classic Education,v1,bass;drums;guitar,clean electric guitar;distorted electric guitar;drum set;electric bass;fx/processed sound;male singer;synthesizer;tambourine;vocalists,True,validation
+AimeeNorwich_Child,Aimee Norwich,v1,bass;drums;guitar;piano,acoustic guitar;clean electric guitar;drum set;electric bass;female singer;piano;vocalists,True,train
+AimeeNorwich_Flying,Aimee Norwich,v1,bass;drums;guitar;piano;strings,cello;clarinet;clean electric guitar;drum set;electric bass;fx/processed sound;piano;trombone,True,train
+AlexanderRoss_GoodbyeBolero,Alexander Ross,v1,bass;drums;guitar;strings,acoustic guitar;brass section;clean electric guitar;drum set;electric bass;harmonica;male singer;viola section,True,train
+AlexanderRoss_VelvetCurtain,Alexander Ross,v1,bass;drums;guitar;strings,acoustic guitar;brass section;clean electric guitar;drum set;electric bass;male singer;string section;vocalists,True,train
+AmarLal_Rest,Amar Lal,v1,guitar,clean electric guitar;fx/processed sound,True,train
+AmarLal_SpringDay1,Amar Lal,v1,guitar,acoustic guitar,True,train
+Auctioneer_OurFutureFaces,Auctioneer,v1,bass;drums;guitar;piano,auxiliary percussion;banjo;clean electric guitar;drum set;electric bass;horn section;male singer;piano;vibraphone;vocalists,True,train
+AvaLuna_Waterduct,Ava Luna,v1,bass;drums;guitar,distorted electric guitar;drum set;electric bass;fx/processed sound;male singer;synthesizer;vibraphone;vocalists,True,validation
+BigTroubles_Phantom,Big Troubles,v1,bass;drums;guitar,distorted electric guitar;drum set;electric bass;male singer,True,test
+BrandonWebster_DontHearAThing,Caitlin Michelle Remmel & Benjamin Hood,v1,piano,female singer;male speaker;piano,False,train
+BrandonWebster_YesSirICanFly,Cameron-Mitchell Ware & Sergi Casanelles,v1,piano,male singer;piano,True,train
+CelestialShore_DieForUs,Celestial Shore,v1,bass;drums;guitar;piano,clean electric guitar;drum set;electric bass;female singer;male singer;synthesizer;tack piano,True,train
+ChrisJacoby_BoothShotLincoln,Chris Jacoby,v1,drums;guitar,clean electric guitar;drum machine;mandolin;tabla,False,train
+ChrisJacoby_PigsFoot,Chris Jacoby,v1,bass;drums,electric bass;kick drum;mandolin;tabla,False,train
+ClaraBerryAndWooldog_AirTraffic,Clara Berry and Wooldog,v1,bass;drums;guitar;piano,clean electric guitar;drum set;electric bass;female singer;lap steel guitar;piano;timpani,True,test
+ClaraBerryAndWooldog_Boys,Clara Berry and Wooldog,v1,drums;piano,brass section;drum set;female singer;piano;snare drum;tack piano;tenor saxophone;timpani;vocalists,False,test
+ClaraBerryAndWooldog_Stella,Clara Berry and Wooldog,v1,bass;drums;piano,auxiliary percussion;drum set;electric bass;female singer;piano;synthesizer;vibraphone;vocalists,True,test
+ClaraBerryAndWooldog_TheBadGuys,Clara Berry and Wooldog,v1,piano,female singer;piano,False,test
+ClaraBerryAndWooldog_WaltzForMyVictims,Clara Berry and Wooldog,v1,bass;drums;piano,drum set;electric bass;female singer;glockenspiel;piano,True,test
+Creepoid_OldTree,Creepoid,v1,bass;drums;guitar,auxiliary percussion;distorted electric guitar;drum set;electric bass;fx/processed sound;male singer;vocalists,True,test
+CroqueMadame_Oil,Croque Madame,v1,bass;drums;guitar;piano,clean electric guitar;double bass;drum set;piano,False,train
+CroqueMadame_Pilot,Croque Madame,v1,bass;drums;guitar;piano,clean electric guitar;double bass;drum set;piano,False,train
+Debussy_LenfantProdigue,NYU Male Singer 1,v1,piano,male singer;piano,False,test
+DreamersOfTheGhetto_HeavyLove,Dreamers of the Ghetto,v1,bass;drums,auxiliary percussion;drum set;electric bass;female singer;fx/processed sound;male singer;synthesizer;vocalists,True,train
+EthanHein_1930sSynthAndUprightBass,Ethan Hein,v1,bass;drums,double bass;drum machine;fx/processed sound,True,train
+EthanHein_BluesForNofi,Ethan Hein,v1,bass;drums,drum set;electric bass,True,train
+EthanHein_GirlOnABridge,Ethan Hein,v1,guitar;piano;strings,auxiliary percussion;distorted electric guitar;piano;string section;synthesizer,True,train
+EthanHein_HarmonicaFigure,Ethan Hein,v1,drums,drum machine;harmonica;synthesizer,True,train
+FacesOnFilm_WaitingForGa,Faces on Film,v1,bass;drums;guitar,acoustic guitar;auxiliary percussion;clean electric guitar;distorted electric guitar;drum set;electric bass;male singer;synthesizer;vibraphone;vocalists,True,train
+FamilyBand_Again,Family Band,v1,bass;drums;guitar,acoustic guitar;auxiliary percussion;clean electric guitar;distorted electric guitar;drum set;electric bass;female singer;lap steel guitar;melodica;vocalists,False,train
+Grants_PunchDrunk,Grants,v1,bass;drums;piano,drum machine;electric bass;fx/processed sound;male rapper;piano;sampler,True,train
+Handel_TornamiAVagheggiar,NYU Female Singer 1,v1,piano,female singer;piano,False,validation
+HeladoNegro_MitadDelMundo,Helado Negro,v1,drums;piano,drum machine;fx/processed sound;male singer;synthesizer;tack piano;vibraphone,True,train
+HezekiahJones_BorrowedHeart,Hezekiah Jones,v1,bass;drums;guitar;strings,acoustic guitar;auxiliary percussion;banjo;cymbal;drum set;electric bass;lap steel guitar;male singer;vibraphone;violin section;vocalists,True,test
+HopAlong_SisterCities,Hop Along,v1,bass;drums;guitar,acoustic guitar;distorted electric guitar;drum set;electric bass;female singer;synthesizer;vocalists,True,train
+InvisibleFamiliars_DisturbingWildlife,Invisible Familiars,v1,bass;drums;guitar;piano,claps;clean electric guitar;drum set;electric bass;male singer;shaker;tack piano;trumpet section;vocalists,True,train
+JoelHelander_Definition,Joel Helander,v1,drums;piano;strings,bassoon;cello;chimes;flute;french horn;horn section;piano;snare drum;string section;trombone;trumpet;viola;violin,False,train
+JoelHelander_ExcessiveResistancetoChange,Joel Helander,v1,bass;drums;guitar;piano;strings,acoustic guitar;auxiliary percussion;bassoon;clarinet;double bass;drum set;french horn;horn section;piano;tack piano;violin;violin section,False,train
+JoelHelander_IntheAtticBedroom,Joel Helander,v1,strings,cello;main system;viola;violin,False,train
+KarimDouaidy_Hopscotch,Karim Douaidy,v1,bass;guitar;piano,acoustic guitar;auxiliary percussion;claps;darbuka;doumbek;electric bass;oud;piano,True,validation
+KarimDouaidy_Yatora,Karim Douaidy,v1,bass;guitar;piano,acoustic guitar;auxiliary percussion;electric bass;oud;piano,True,validation
+LizNelson_Coldwar,Liz Nelson & Jennifer Davies,v1,guitar,acoustic guitar;female singer,True,train
+LizNelson_ImComingHome,Liz Nelson,v1,,female singer,False,train
+LizNelson_Rainfall,Liz Nelson & Jennifer Davies,v1,guitar,acoustic guitar;clean electric guitar;female singer,True,train
+Lushlife_ToynbeeSuite,Lushlife,v1,bass;drums;guitar;piano;strings,brass section;claps;clarinet;clean electric guitar;drum machine;drum set;electric bass;fx/processed sound;glockenspiel;horn section;male rapper;piano;scratches;string section;synthesizer;trumpet section,True,test
+MatthewEntwistle_AnEveningWithOliver,Matthew Entwistle,v1,bass;piano;strings,bassoon;bongo;cello;clarinet;double bass;flute;french horn section;glockenspiel;harp;oboe;piano;viola;violin;violin section;vocalists,True,validation
+MatthewEntwistle_DontYouEver,Matthew Entwistle,v1,bass;drums;piano;strings,brass section;double bass;drum set;male singer;piano;violin section,True,validation
+MatthewEntwistle_FairerHopes,Matthew Entwistle,v1,bass;drums;piano;strings,bass drum;cello section;clarinet section;cymbal;double bass;flute;french horn;gong;harp;piano;string section;violin section,True,validation
+MatthewEntwistle_ImpressionsOfSaturn,Matthew Entwistle,v1,piano;strings,cello;fx/processed sound;piano;viola;violin,True,validation
+MatthewEntwistle_Lontano,Matthew Entwistle,v1,piano,female singer;piano,False,validation
+MatthewEntwistle_TheArch,Matthew Entwistle,v1,piano;strings,bamboo flute;cello section;cymbal;flute section;french horn section;fx/processed sound;gong;piano;piccolo;synthesizer;trombone section;trumpet section;viola section;violin section,True,validation
+MatthewEntwistle_TheFlaxenField,Matthew Entwistle,v1,piano;strings,cello;clarinet;piano;violin,True,validation
+Meaxic_TakeAStep,Meaxic,v1,bass;drums;guitar,clean electric guitar;distorted electric guitar;drum set;electric bass;male singer;vocalists,True,train
+Meaxic_YouListen,Meaxic,v1,bass;drums;guitar,acoustic guitar;clean electric guitar;distorted electric guitar;drum set;electric bass;male singer;vocalists,True,train
+MichaelKropf_AllGoodThings,Michael Kropf,v1,piano;strings,piano;violin,False,train
+Mozart_BesterJungling,NYU Female Singer 1,v1,piano,female singer;piano,False,validation
+Mozart_DiesBildnis,NYU Male Singer 1,v1,piano,male singer;piano,False,test
+MusicDelta_80sRock,Music Delta [0],v1,bass;drums;guitar,distorted electric guitar;drum set;electric bass;male singer,True,train
+MusicDelta_Beatles,Music Delta [1],v1,bass;drums;guitar,acoustic guitar;clean electric guitar;drum set;electric bass;female singer;male singer,True,train
+MusicDelta_BebopJazz,Music Delta [2],v1,bass;drums;piano,double bass;drum set;piano;tenor saxophone;trumpet,True,train
+MusicDelta_Beethoven,Music Delta [3],v1,bass;strings,bassoon;cello;clarinet;double bass;flute;french horn;oboe;timpani;trumpet;viola;violin section,True,train
+MusicDelta_Britpop,Music Delta [4],v1,bass;drums;guitar,clean electric guitar;distorted electric guitar;drum set;electric bass;female singer,True,train
+MusicDelta_ChineseChaoZhou,Music Delta Chinese,v1,,dizi;erhu;guzheng;yangqin,True,train
+MusicDelta_ChineseDrama,Music Delta Chinese,v1,,dizi;erhu;guzheng;yangqin;zhongruan,True,train
+MusicDelta_ChineseHenan,Music Delta Chinese,v1,,dizi;erhu;guzheng;liuqin;yangqin,True,train
+MusicDelta_ChineseJiangNan,Music Delta Chinese,v1,,dizi;erhu;guzheng;yangqin;zhongruan,True,train
+MusicDelta_ChineseXinJing,Music Delta Chinese,v1,,erhu;gu;liuqin;yangqin;zhongruan,True,train
+MusicDelta_ChineseYaoZu,Music Delta Chinese,v1,,auxiliary percussion;dizi;erhu;guzheng;yangqin,True,train
+MusicDelta_CoolJazz,Music Delta [5],v1,bass;drums;piano,baritone saxophone;double bass;drum set;piano;trumpet,True,train
+MusicDelta_Country1,Music Delta [6],v1,bass;drums;guitar,acoustic guitar;drum set;electric bass;male singer,True,test
+MusicDelta_Country2,Music Delta [7],v1,bass;drums;guitar,clean electric guitar;drum set;electric bass;female singer,True,train
+MusicDelta_Disco,Music Delta [8],v1,bass;drums;guitar,clean electric guitar;drum set;electric bass;male singer,True,train
+MusicDelta_FreeJazz,Music Delta [9],v1,bass;drums,bass clarinet;double bass;drum set,True,test
+MusicDelta_FunkJazz,Music Delta [10],v1,bass;drums;piano,alto saxophone;drum set;electric bass;electric piano,True,test
+MusicDelta_FusionJazz,Music Delta [11],v1,bass;drums;piano,drum set;electric bass;electric piano;soprano saxophone;synthesizer;trumpet,True,train
+MusicDelta_Gospel,Music Delta [12],v1,bass;drums;guitar,claps;clean electric guitar;drum set;electric bass;female singer,True,train
+MusicDelta_GriegTrolltog,Music Delta [13],v1,bass;strings,brass section;cello;clarinet section;cymbal;double bass;flute section;oboe;piccolo;timpani;trumpet section;tuba;viola section;violin section,True,train
+MusicDelta_Grunge,Music Delta [14],v1,bass;drums;guitar,distorted electric guitar;drum set;electric bass;male singer,True,train
+MusicDelta_Hendrix,Music Delta [15],v1,bass;drums;guitar,distorted electric guitar;drum set;electric bass;male singer,True,validation
+MusicDelta_InTheHalloftheMountainKing,Music Delta [16],v1,bass;drums;strings,bassoon;cello;clarinet;cymbal;double bass;flute;french horn section;oboe;piccolo;timpani;toms;trombone;trumpet section;tuba;viola;violin section,True,train
+MusicDelta_LatinJazz,Music Delta [17],v1,bass;drums;piano,drum set;electric bass;electric piano;flute;trumpet,True,validation
+MusicDelta_ModalJazz,Music Delta [18],v1,bass;drums;piano,double bass;drum set;piano;tenor saxophone;trumpet,True,train
+MusicDelta_Pachelbel,Music Delta [19],v1,strings,cello;viola;violin,True,train
+MusicDelta_Punk,Music Delta [20],v1,bass;drums;guitar,distorted electric guitar;drum set;electric bass;male singer,True,train
+MusicDelta_Reggae,Music Delta [21],v1,bass;drums;guitar,clean electric guitar;drum set;electric bass;male singer,True,train
+MusicDelta_Rock,Music Delta [22],v1,bass;drums;guitar,clean electric guitar;drum set;electric bass;male singer,True,train
+MusicDelta_Rockabilly,Music Delta [23],v1,bass;drums;guitar,clean electric guitar;distorted electric guitar;drum set;electric bass;female singer,True,test
+MusicDelta_Shadows,Music Delta [24],v1,bass;drums;guitar,clean electric guitar;drum set;electric bass,True,test
+MusicDelta_SpeedMetal,Music Delta [25],v1,bass;drums;guitar,distorted electric guitar;drum set;electric bass,True,test
+MusicDelta_SwingJazz,Music Delta [26],v1,bass;drums;piano,clarinet;double bass;drum set;piano,True,train
+MusicDelta_Vivaldi,Music Delta [27],v1,bass;strings,cello;double bass;viola section;violin section,True,train
+MusicDelta_Zeppelin,Music Delta [28],v1,bass;drums;guitar,distorted electric guitar;drum set;electric bass,True,train
+NightPanther_Fire,Night Panther,v1,bass;drums;strings,auxiliary percussion;brass section;drum machine;drum set;electric bass;male singer;string section;synthesizer;vocalists,True,train
+Phoenix_BrokenPledgeChicagoReel,Phoenix,v1,guitar;strings,acoustic guitar;flute;violin,False,train
+Phoenix_ColliersDaughter,Phoenix,v1,bass;guitar;strings,acoustic guitar;electric bass;flute;main system;violin,False,train
+Phoenix_ElzicsFarewell,Phoenix,v1,guitar;strings,acoustic guitar;main system;mandolin;violin,False,train
+Phoenix_LarkOnTheStrandDrummondCastle,Phoenix,v1,guitar;strings,acoustic guitar;flute;main system;violin,False,train
+Phoenix_ScotchMorris,Phoenix,v1,guitar;strings,acoustic guitar;flute;main system;violin,False,train
+Phoenix_SeanCaughlinsTheScartaglen,Phoenix,v1,bass;guitar;strings,acoustic guitar;electric bass;main system;mandolin;violin,False,train
+PortStWillow_StayEven,Port St Willow,v1,bass;drums;guitar;piano,clean electric guitar;cymbal;drum set;electric bass;fx/processed sound;male singer;piano;vocalists,True,train
+PurlingHiss_Lolita,Purling Hiss,v1,bass;drums;guitar,distorted electric guitar;drum set;electric bass;tambourine;vocalists,False,train
+Schubert_Erstarrung,NYU Male Singer 1,v1,piano,male singer;piano,False,test
+Schumann_Mignon,NYU Female Singer 1,v1,piano,female singer;piano,False,validation
+SecretMountains_HighHorse,Secret Mountains,v1,bass;drums;guitar;piano,clean electric guitar;cymbal;drum set;electric bass;female singer;fx/processed sound;piano;synthesizer;vocalists,True,train
+Snowmine_Curfews,Snowmine,v1,bass;drums;guitar;piano,auxiliary percussion;clean electric guitar;drum set;electric bass;male singer;sampler;synthesizer;tack piano;vibraphone;vocalists,True,test
+StevenClark_Bounty,Steven Clark,v1,bass;drums;guitar;piano,clean electric guitar;drum set;electric bass;male singer;piano;synthesizer;vocalists,True,test
+StrandOfOaks_Spacestation,Strand of Oaks,v1,bass;drums;piano,auxiliary percussion;drum set;electric bass;male singer;piano;synthesizer;tack piano;vocalists,True,test
+SweetLights_YouLetMeDown,Sweet Lights,v1,bass;drums;guitar;piano,acoustic guitar;auxiliary percussion;claps;drum set;electric bass;male singer;piano;synthesizer;tack piano;timpani;vocalists,True,test
+TablaBreakbeatScience_Animoog,Tabla Breakbeat Science,v1,bass;drums;guitar,distorted electric guitar;drum machine;electric bass;fx/processed sound;tabla,True,validation
+TablaBreakbeatScience_CaptainSky,Tabla Breakbeat Science,v1,bass;drums,drum set;electric bass;tabla,True,validation
+TablaBreakbeatScience_MiloVsMongo,Tabla Breakbeat Science,v1,drums,drum set;fx/processed sound;mandolin;synthesizer;tabla,True,validation
+TablaBreakbeatScience_MoodyPlucks,Tabla Breakbeat Science,v1,drums;guitar,clean electric guitar;drum machine;fx/processed sound;harp;synthesizer;tabla,True,validation
+TablaBreakbeatScience_PhaseTransition,Tabla Breakbeat Science,v1,bass;drums,accordion;drum machine;electric bass;fx/processed sound;mandolin;synthesizer;tabla,True,validation
+TablaBreakbeatScience_RockSteady,Tabla Breakbeat Science,v1,drums,accordion;drum machine;mandolin;tabla,True,validation
+TablaBreakbeatScience_Scorpio,Tabla Breakbeat Science,v1,drums,accordion;drum machine;fx/processed sound;synthesizer;tabla,True,validation
+TablaBreakbeatScience_Vger,Tabla Breakbeat Science,v1,drums;guitar,accordion;auxiliary percussion;clean electric guitar;drum machine;fx/processed sound;mandolin;synthesizer;tabla,True,validation
+TablaBreakbeatScience_WhoIsIt,Tabla Breakbeat Science,v1,bass;drums,accordion;drum machine;electric bass;mandolin;synthesizer;tabla,True,validation
+TheDistricts_Vermont,The Districts,v1,bass;drums;guitar,clean electric guitar;drum set;electric bass;male singer;synthesizer;vocalists,True,train
+TheScarletBrand_LesFleursDuMal,The Scarlet Brand,v1,bass;drums;guitar,clean electric guitar;distorted electric guitar;drum set;electric bass;fx/processed sound;male singer,True,train
+TheSoSoGlos_Emergency,The So So Glos,v1,bass;drums;guitar,acoustic guitar;auxiliary percussion;distorted electric guitar;drum set;electric bass;fx/processed sound;male singer;synthesizer;vibraphone;vocalists,True,validation
+Wolf_DieBekherte,NYU Female Singer 1,v1,piano,female singer;piano,False,validation
+Allegria_MendelssohnMovement1,Allegria,v2,strings,cello;main system;viola;violin,False,train
+AmadeusRedux_MozartAllegro,AmadeusRedux,v2,strings,cello;main system;viola;violin,False,train
+AmadeusRedux_SchubertMovement2,AmadeusRedux,v2,strings,cello;main system;viola;violin,False,train
+AmadeusRedux_SchubertMovement3,AmadeusRedux,v2,strings,cello;main system;viola;violin,False,train
+BarefootSisters_RedJetta,BarefootSisters,v2,drums;guitar;piano,acoustic guitar;drum set;piano;vocalists,True,train
+CassandraJenkins_PerfectDay,CassandraJenkins,v2,bass;drums;guitar;piano;strings,acoustic guitar;drum set;electric bass;female singer;horn section;piano;string section;synthesizer,True,train
+CatMartino_IPromise,CatMartino,v2,drums,drum machine;drum set;electronic organ;female singer;fx/processed sound;synthesizer,True,train
+Cayetana_MissThing,Cayetana,v2,bass;drums;guitar,distorted electric guitar;drum set;electric bass;female singer,True,train
+DahkaBand_SoldierMan,DahkaBand,v2,bass;drums;guitar,clean electric guitar;double bass;drum set;male singer;tenor saxophone,False,train
+DeadMilkmen_PrisonersCinema,DeadMilkmen,v2,bass;drums;guitar,acoustic guitar;castanet;clean electric guitar;distorted electric guitar;drum set;electric bass;electronic organ;fx/processed sound;glockenspiel;male singer;shaker;tambourine;vocalists,True,train
+DeclareAString_MendelssohnPianoTrio1Movement1,DeclareAString,v2,piano;strings,cello;main system;piano;violin,False,test
+DeclareAString_MendelssohnPianoTrio1Movement2,DeclareAString,v2,piano;strings,cello;main system;piano;violin,False,test
+FallingSparks_Improvisation1,FallingSparks,v2,bass,auxiliary percussion;clarinet;double bass;main system,False,train
+FallingSparks_Improvisation2,FallingSparks,v2,bass,auxiliary percussion;clarinet;double bass;main system,False,train
+FallingSparks_Improvisation3,FallingSparks,v2,bass,auxiliary percussion;clarinet;double bass;main system,False,train
+FallingSparks_PakKlongTalad,FallingSparks,v2,bass,auxiliary percussion;clarinet;double bass;main system,False,train
+FennelCartwright_DearTessie,FennelCartwright,v2,,bassoon;clarinet;flute;french horn;main system;oboe,False,train
+FennelCartwright_FlowerDrumSong,FennelCartwright,v2,,bassoon;clarinet;flute;french horn;oboe,False,train
+FennelCartwright_WinterLake,FennelCartwright,v2,,bassoon;clarinet;flute;french horn;main system;oboe,False,train
+FilthyBird_IdLikeToKnow,FilthyBird,v2,bass;drums;guitar,acoustic guitar;distorted electric guitar;drum set;electric bass;female singer;tambourine,True,train
+FruitCathedral_KeepMeRunnin,FruitCathedral,v2,bass;drums;guitar,acoustic guitar;distorted electric guitar;drum set;electric bass;shaker;vocalists,True,train
+HopsNVinyl_ChickenFriedSteak,HopsNVinyl,v2,bass;drums,double bass;drum set;main system;tenor saxophone;vibraphone,False,train
+HopsNVinyl_HoneyBrown,HopsNVinyl,v2,bass;drums,double bass;drum set;main system;tenor saxophone;vibraphone,False,train
+HopsNVinyl_ReignCheck,HopsNVinyl,v2,bass;drums,double bass;drum set;main system;tenor saxophone;vibraphone,False,train
+HopsNVinyl_WidowsWalk,HopsNVinyl,v2,bass;drums,double bass;drum set;main system;soprano saxophone;vibraphone,False,train
+Karachacha_Volamos,Karachacha,v2,bass;drums;guitar,acoustic guitar;auxiliary percussion;double bass;drum set;kick drum;vibraphone,False,train
+Katzn_CharlieKnox,Katzn,v2,piano;strings,auxiliary percussion;cello;clarinet;main system;piano;violin,False,test
+LewisAndClarke_TheSilverSea,LewisAndClarke,v2,bass;drums;guitar;piano;strings,acoustic guitar;cello;cymbal;drum set;electric bass;electric piano;male singer;string section;synthesizer,False,train
+LittleTybee_TheAlchemist,LittleTybee,v2,bass;drums;guitar;piano;strings,acoustic guitar;clean electric guitar;distorted electric guitar;drum set;electric bass;electric piano;female singer;violin,True,train
+MatthewEntwistle_ReturnToVenezia,MatthewEntwistle,v2,piano;strings,piano;viola,False,test
+MidnightBlue_HuntingSeason,MidnightBlue,v2,bass;drums;guitar;piano,distorted electric guitar;drum set;electric bass;male singer;piano,True,train
+MidnightBlue_StarsAreScreaming,MidnightBlue,v2,bass;drums;guitar,distorted electric guitar;drum set;electric bass;male singer,True,train
+MutualBenefit_NotForNothing,MutualBenefit,v2,bass;drums;guitar;piano;strings,acoustic guitar;drum set;electric bass;male singer;piano;violin;violin section,True,train
+PatternIsMovement_SaveMe,PatternIsMovement,v2,drums,drum set;electronic organ;male singer,True,test
+PeterMatthewBauer_YouAlwaysLookForSomeoneLost,PeterMatthewBauer,v2,bass;drums;guitar;piano,acoustic guitar;auxiliary percussion;drum set;electric bass;piano;vocalists,True,train
+Plasma_GoodShout,Plasma,v2,bass;drums;guitar,clean electric guitar;distorted electric guitar;drum set;electric bass,True,train
+PoliceHearingDepartment_Brahms,PoliceHearingDepartment,v2,piano;strings,main system;piano;viola,False,train
+PoliceHearingDepartment_SchumannMovement1,PoliceHearingDepartment,v2,piano;strings,bassoon;flute;main system;piano;viola;violin,False,train
+PoliceHearingDepartment_SchumannMovement2,PoliceHearingDepartment,v2,piano;strings,bassoon;flute;main system;piano;viola;violin,False,train
+PoliceHearingDepartment_VivaldiMovement1,PoliceHearingDepartment,v2,strings,bassoon;flute;main system;violin,False,train
+PoliceHearingDepartment_VivaldiMovement2,PoliceHearingDepartment,v2,strings,bassoon;flute;main system;violin,False,train
+PoliceHearingDepartment_VivaldiMovement3,PoliceHearingDepartment,v2,strings,bassoon;flute;main system;violin,False,train
+QuantumChromos_Circuits,QuantumChromos,v2,bass;drums;piano;strings,bass drum;clarinet;double bass;main system;male singer;piano;violin,False,validation
+RodrigoBonelli_BalladForLaura,RodrigoBonelli,v2,bass;drums;piano,bass clarinet;double bass;drum set;piano;tenor saxophone;trombone;trumpet,False,train
+SasquatchConnection_BoomBoxing,SasquatchConnection,v2,bass;drums;guitar;piano,clean electric guitar;double bass;drum set;piano;tenor saxophone;trombone section;trumpet section,False,validation
+SasquatchConnection_HolyClamsBatman,SasquatchConnection,v2,bass;drums;guitar;piano,clean electric guitar;double bass;drum set;piano;tenor saxophone;trombone section;trumpet section,False,validation
+SasquatchConnection_Illuminati,SasquatchConnection,v2,bass;drums;piano,double bass;drum set;horn section;piano;trombone section;trumpet section,False,validation
+SasquatchConnection_Struttin,SasquatchConnection,v2,bass;drums;guitar;piano,clean electric guitar;double bass;drum set;piano;tenor saxophone;trombone section;trumpet section,False,validation
+SasquatchConnection_ThanksALatte,SasquatchConnection,v2,bass;drums;guitar;piano,clean electric guitar;double bass;drum set;piano;tenor saxophone;trombone section;trumpet section,False,validation
+SlowGhost_FirstSnow,SlowGhost,v2,bass;drums;piano,drum set;electric bass;electric piano,True,train
+SlowGhost_MidnightGroove,SlowGhost,v2,bass;drums;piano,drum set;electric bass;electric piano,True,train
+SlowGhost_Peanut,SlowGhost,v2,bass;drums;piano,drum set;electric bass;electric piano,True,train
+SlowGhost_YoureAMystery,SlowGhost,v2,bass;drums;piano,drum set;electric bass;electric piano,True,train
+SongYiJeon_TwoMoons,SongYiJeon,v2,piano,female singer;piano,False,train
+Sweat_AlmostAlways,Sweat,v2,drums;guitar;piano,clean electric guitar;drum set;main system;piano;synthesizer;tenor saxophone,False,train
+Sweat_Anecdoche,Sweat,v2,drums;guitar;piano,alto saxophone;clean electric guitar;drum set;main system;piano,False,train
+Sweat_Elegy,Sweat,v2,drums;guitar;piano,clean electric guitar;drum set;main system;piano;tenor saxophone,False,train
+Sweat_Mesozoic,Sweat,v2,drums;guitar;piano,clean electric guitar;drum set;main system;piano;synthesizer;tenor saxophone,False,train
+Sweat_Sn1572,Sweat,v2,bass;drums;guitar;piano,distorted electric guitar;drum set;electric bass;electric piano;main system,False,train
+Sweat_Tact,Sweat,v2,drums;guitar;piano,clean electric guitar;drum set;main system;piano;tenor saxophone,False,train
+TemperedElan_DorothyJeanne,TemperedElan,v2,,flute;harp;main system,False,train
+TemperedElan_WiseOne,TemperedElan,v2,,flute;harp;main system,False,train
+TheFranckDuo_FranckViolinSonataInAMajorMovement1,TheFranckDuo,v2,piano;strings,main system;piano;violin,True,train
+TheFranckDuo_FranckViolinSonataInAMajorMovement2,TheFranckDuo,v2,piano;strings,main system;piano;violin,False,train
+TheKitchenettes_Alive,TheKitchenettes,v2,bass;drums;guitar;piano;strings,acoustic guitar;clean electric guitar;drum set;electric bass;female singer;piano;violin;vocalists,True,train
+TheNoHoStringOrchestra_ElgarMovement1,TheNoHoStringOrchestra,v2,bass;strings,cello section;double bass;main system;viola section;violin section,False,train
+TheNoHoStringOrchestra_ElgarMovement2,TheNoHoStringOrchestra,v2,bass;strings,cello section;double bass;main system;viola section;violin section,False,train
+TheNoHoStringOrchestra_ElgarMovement3,TheNoHoStringOrchestra,v2,bass;strings,cello section;double bass;main system;viola section;violin section,False,train
+TheTonTons_Lush,TheTonTons,v2,bass;drums;guitar,clean electric guitar;distorted electric guitar;drum set;electric bass;female singer;male singer;tambourine,True,train
+TleilaxEnsemble_Late,TleilaxEnsemble,v2,bass;strings,double bass;female singer;main system;male singer;violin,False,train
+TleilaxEnsemble_MelancholyFlowers,TleilaxEnsemble,v2,bass;strings,double bass;female singer;main system;male singer;violin,False,train
+Torres_NewSkin,Torres,v2,bass;drums;guitar,clean electric guitar;distorted electric guitar;drum set;electric bass;female singer,True,train
+TrevorAndTheSoundwaves_AloneAndSad,TrevorAndTheSoundwaves,v2,bass;drums;guitar,clean electric guitar;distorted electric guitar;drum set;electric bass;male singer,True,train
+Verdi_IlTrovatore,Verdi,v2,piano,female singer;piano,False,train

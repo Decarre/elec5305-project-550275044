@@ -1,0 +1,9 @@
+{
+  "source": "official MedleyDB sample from Zenodo record 1438309",
+  "tracks": 2,
+  "artists": 2,
+  "stems_with_activation_columns": 8,
+  "activation_threshold_for_summary": 0.5,
+  "all_annotation_columns_match_expected_non_main_system_stems": true,
+  "purpose": "audio and annotation alignment QA; no trained-model or generalisation claim"
+}
