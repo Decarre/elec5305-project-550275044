@@ -55,7 +55,7 @@ Acceptance gate:
 
 ## Phase 3: training and validation CLI
 
-**Status:** pending.
+**Status:** training/checkpoint engine implemented locally; CLI wiring pending.
 
 Deliverables:
 

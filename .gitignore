@@ -1,32 +1,20 @@
-# Python
-__pycache__/
-*.py[cod]
-.pytest_cache/
-.ipynb_checkpoints/
-.venv/
-venv/
-*.egg-info/
-
-# Editors and operating systems
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-# Datasets and large generated artifacts
-data/audio/
-data/raw/
-models/
-checkpoints/
+# Restricted/local datasets and experiment outputs
+data/local/
 *.wav
 *.flac
-*.mp3
-*.ogg
+*.tar
+*.tar.gz
+*.zip
 *.pt
 *.pth
-*.ckpt
 
-# Local experiment tracking
+# Python environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Local training runs
 runs/
-wandb/
-
+checkpoints/

@@ -20,4 +20,5 @@ epochs: 50
 learning_rate: 0.001
 seed: 5305
 reporting_grid_seconds: 0.5
+early_stopping_patience: 8
 

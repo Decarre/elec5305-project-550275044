@@ -30,6 +30,7 @@ class ExperimentConfig:
     learning_rate: float = 0.001
     seed: int = 5305
     reporting_grid_seconds: float = 0.5
+    early_stopping_patience: int = 8
 
     def validate(self) -> "ExperimentConfig":
         if self.sample_rate <= 0:
@@ -52,6 +53,8 @@ class ExperimentConfig:
             raise ValueError("model_type must be 'baseline', 'max' or 'attention'")
         if self.hidden_size <= 0 or self.batch_size <= 0 or self.epochs <= 0:
             raise ValueError("training dimensions must be positive")
+        if self.early_stopping_patience <= 0:
+            raise ValueError("early_stopping_patience must be positive")
         if self.learning_rate <= 0 or self.reporting_grid_seconds <= 0:
             raise ValueError("learning rate and reporting grid must be positive")
         return self
