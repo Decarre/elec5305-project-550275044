@@ -15,7 +15,7 @@ Read this file, `README.md`, `docs/index.md`, and the latest Git commit before e
 
 ## Phase 1: experiment semantics and evaluation foundations
 
-**Status:** implemented and tested on 4 October 2026; commit after final review.
+**Status:** completed and pushed as commit `d8ef6b3` on 4 October 2026.
 
 - Central instrument taxonomy shared by metadata and audio pipelines.
 - Mean and attention models aggregate the same frame-probability quantity so pooling comparisons are controlled.
@@ -30,11 +30,11 @@ Acceptance gate:
 
 - `pytest` passes.
 - `git diff --check` passes.
-- Existing sample outputs are explicitly treated as results from the earlier baseline until Phase 4 reruns them.
+- Controlled model semantics are covered by the test suite.
 
 ## Phase 2: manifests and leakage barriers
 
-**Status:** implemented locally after the Phase 1 checkpoint; commit after tests.
+**Status:** completed and pushed as commit `172c04b` on 4 October 2026.
 
 Deliverables:
 
@@ -55,7 +55,7 @@ Acceptance gate:
 
 ## Phase 3: training and validation CLI
 
-**Status:** training/checkpoint engine and NPZ train/evaluate CLI implemented locally; full test gate and checkpoint commit pending.
+**Status:** completed in commits `233f330` and `ad61382` on 4 October 2026.
 
 Deliverables:
 
@@ -74,7 +74,7 @@ Acceptance gate:
 
 ## Phase 4: public-sample rerun and documentation sync
 
-**Status:** pending.
+**Status:** completed on 5 October 2026.
 
 Deliverables:
 
@@ -137,3 +137,5 @@ These begin only after the main weak-supervision experiment is complete.
 - 2026-10-04: Phase 1 committed and pushed as `d8ef6b3`; 10 tests pass.
 - 2026-10-04: Phase 2 committed and pushed as `172c04b`; public-sample manifest smoke test found 2/2 mixes and 2/2 activation files while keeping `generalisation_valid=false`.
 - 2026-10-04: Phase 3 training/checkpoint engine committed and pushed as `233f330`; validation thresholds are stored in the checkpoint and reused unchanged for evaluation.
+- 2026-10-04: Phase 3 validation/train/evaluate CLI committed and pushed as `ad61382`; legacy dry-run configuration validation remains available.
+- 2026-10-05: Phase 4 controlled public-sample rerun completed; all 13 tests pass and the README, Project Site and AttentionMIC implementation map were synchronised to the saved artifacts.

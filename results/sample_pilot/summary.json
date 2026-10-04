@@ -11,16 +11,17 @@
     "strings",
     "vocals"
   ],
+  "pooling_protocol": "controlled frame-probability pooling for both mean and attention models",
   "positive_label_rule": "activation confidence >=0.5 for at least 10% of annotation frames in the clip",
   "training_and_evaluation_set_are_identical": true,
   "epochs": 25,
   "seed": 5305,
   "models": {
     "mean": {
-      "initial_training_bce": 0.4664711957392485,
-      "final_training_bce": 0.01415976736208667,
-      "training_micro_f1": 0.9988674971687429,
-      "training_macro_f1": 0.9986504723346828
+      "initial_training_bce": 0.47149794257205463,
+      "final_training_bce": 0.03573246060506157,
+      "training_micro_f1": 0.8721227621483376,
+      "training_macro_f1": 0.771689497716895
     },
     "attention": {
       "initial_training_bce": 0.45092338556828704,
@@ -29,6 +30,6 @@
       "training_macro_f1": 0.9967457104299209
     }
   },
-  "runtime_seconds": 23.417916297912598,
+  "runtime_seconds": 14.681924819946289,
   "limitation": "Two songs and two artists cannot support artist-disjoint train/validation/test partitions; metrics only verify the implementation can fit this tiny sample."
 }

@@ -26,33 +26,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from instrument_localization.models import AttentionInstrumentModel, BaselineInstrumentModel  # noqa: E402
+from instrument_localization.annotations import read_activation_confidence  # noqa: E402
+from instrument_localization.metrics import multilabel_metrics  # noqa: E402
+from instrument_localization.taxonomy import family_for_instrument  # noqa: E402
 
 
 CLASSES = ("guitar", "strings", "vocals")
-FAMILIES = {
-    "guitar": {
-        "acoustic guitar", "clean electric guitar", "distorted electric guitar",
-        "slide guitar", "lap steel guitar",
-    },
-    "strings": {
-        "violin", "viola", "cello", "violin section", "viola section",
-        "cello section", "string section",
-    },
-    "vocals": {
-        "male singer", "female singer", "male rapper", "female rapper",
-        "male screamer", "female screamer", "vocalists", "choir",
-    },
-}
-
-
-def family_for(instrument):
-    instrument = instrument.lower()
-    return next((name for name, members in FAMILIES.items() if instrument in members), None)
-
-
-def read_activation(path):
-    values = np.genfromtxt(str(path), delimiter=",", names=True, dtype=np.float32)
-    return values["time"], {name: values[name] for name in values.dtype.names if name != "time"}
 
 
 def make_dataset(sample_root, clip_seconds, positive_fraction):
@@ -69,10 +48,12 @@ def make_dataset(sample_root, clip_seconds, positive_fraction):
         track_id = track_dir.name
         metadata = yaml.safe_load((track_dir / (track_id + "_METADATA.yaml")).read_text(encoding="utf-8"))
         waveform, _ = librosa.load(str(track_dir / metadata["mix_filename"]), sr=sample_rate, mono=True)
-        times, stem_curves = read_activation(annotation_root / (track_id + "_ACTIVATION_CONF.lab"))
+        times, stem_curves = read_activation_confidence(
+            annotation_root / (track_id + "_ACTIVATION_CONF.lab")
+        )
         family_curves = {name: [] for name in CLASSES}
         for stem_id, stem in metadata["stems"].items():
-            family = family_for(stem["instrument"])
+            family = family_for_instrument(stem["instrument"], CLASSES)
             if family is not None and stem_id in stem_curves:
                 family_curves[family].append(stem_curves[stem_id])
         family_curves = {
@@ -99,27 +80,6 @@ def make_dataset(sample_root, clip_seconds, positive_fraction):
     return torch.from_numpy(np.stack(features)), torch.from_numpy(np.stack(labels)), records, references
 
 
-def metrics(targets, probabilities):
-    predicted = probabilities >= 0.5
-    truth = targets >= 0.5
-    rows = []
-    for index, name in enumerate(CLASSES):
-        tp = int(np.sum(predicted[:, index] & truth[:, index]))
-        fp = int(np.sum(predicted[:, index] & ~truth[:, index]))
-        fn = int(np.sum(~predicted[:, index] & truth[:, index]))
-        precision = tp / (tp + fp) if tp + fp else 0.0
-        recall = tp / (tp + fn) if tp + fn else 0.0
-        f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
-        rows.append({"class": name, "positive_clips": int(truth[:, index].sum()), "precision": precision, "recall": recall, "f1": f1})
-    tp = int(np.sum(predicted & truth))
-    fp = int(np.sum(predicted & ~truth))
-    fn = int(np.sum(~predicted & truth))
-    p = tp / (tp + fp) if tp + fp else 0.0
-    r = tp / (tp + fn) if tp + fn else 0.0
-    micro_f1 = 2 * p * r / (p + r) if p + r else 0.0
-    return rows, micro_f1, float(np.mean([row["f1"] for row in rows]))
-
-
 def train(model_name, inputs, targets, epochs, learning_rate, seed):
     torch.manual_seed(seed)
     model_type = BaselineInstrumentModel if model_name == "mean" else AttentionInstrumentModel
@@ -143,8 +103,19 @@ def train(model_name, inputs, targets, epochs, learning_rate, seed):
     model.eval()
     with torch.no_grad():
         output = model(inputs)
-        probabilities = torch.sigmoid(output["clip_logits"]).numpy()
-    class_rows, micro_f1, macro_f1 = metrics(targets.numpy(), probabilities)
+        probabilities = output["clip_probabilities"].numpy()
+    evaluated = multilabel_metrics(targets.numpy(), probabilities, 0.5, CLASSES)
+    class_rows = []
+    for index, row in enumerate(evaluated["per_class"]):
+        class_rows.append({
+            "class": row["class"],
+            "positive_clips": int((targets.numpy()[:, index] >= 0.5).sum()),
+            "precision": row["precision"],
+            "recall": row["recall"],
+            "f1": row["f1"],
+        })
+    micro_f1 = evaluated["micro"]["f1"]
+    macro_f1 = evaluated["macro"]["f1"]
     return model, losses, class_rows, micro_f1, macro_f1
 
 
@@ -216,6 +187,7 @@ def run(sample_root, output_dir, epochs, seed):
         "clips": len(records),
         "clip_seconds": 2.0,
         "classes": list(CLASSES),
+        "pooling_protocol": "controlled frame-probability pooling for both mean and attention models",
         "positive_label_rule": "activation confidence >=0.5 for at least 10% of annotation frames in the clip",
         "training_and_evaluation_set_are_identical": True,
         "epochs": epochs,

@@ -1,7 +1,7 @@
 # Attention-Based Temporal Localization of Musical Instruments
 
 **Author:** Ryan Hu
-**Status:** Preliminary implementation, dataset audit and two-song engineering pilot completed (4 October 2026)
+**Status:** Reproducible experiment framework, dataset audit and controlled two-song engineering pilot completed (5 October 2026)
 
 ## Student information
 
@@ -10,7 +10,7 @@
 - **GitHub username:** Decarre
 - **GitHub repository:** <https://github.com/Decarre/elec5305-project-550275044>
 - **GitHub Project Site:** <https://decarre.github.io/elec5305-project-550275044/>
-- **Project feedback submission PDF:** [ELEC5305_Project_Feedback_Submission_550275044.pdf](ELEC5305_Project_Feedback_Submission_550275044.pdf)
+- **Project Feedback Two PDF:** [ELEC5305_Project_Feedback_Two_550275044.pdf](output/pdf/ELEC5305_Project_Feedback_Two_550275044.pdf)
 - **Full proposal PDF:** [ELEC5305_Project_Proposal_550275044.pdf](ELEC5305_Project_Proposal_550275044.pdf)
 
 ## Overview
@@ -87,13 +87,18 @@ The repository now contains a reproducible implementation and preliminary eviden
 - A convolutional encoder with global-mean and instrument-specific attention pooling models.
 - AttentionMIC-style aggregation with separate frame scores, attention weights and clip probabilities.
 - Temporal smoothing and conversion from frame probabilities to activity intervals.
-- A dry-run command-line interface.
-- Unit tests for configuration, model output shapes, attention normalisation and temporal post-processing (**5/5 passing**).
+- A command-line interface for configuration validation, training and frozen-checkpoint evaluation.
+- Leakage-safe track and clip manifests created only after an artist-grouped split.
+- Validation-only threshold selection stored in the selected checkpoint and reused unchanged at test time.
+- Unit tests for model semantics, manifests, metrics, training/checkpoint reload and temporal post-processing (**13/13 passing**).
 - A metadata audit of the official MedleyDB v1/v2 lists: **196 tracks, 116 artists**, and **117 tracks** with matching v2 activation-confidence files.
 - Audio/annotation alignment checks on both tracks in the official public sample; all eight expected instrument stems match annotation columns.
-- A 230-clip, two-song training-set sanity check for mean and attention pooling.
+- A 230-clip, two-song training-set sanity check using controlled frame-probability pooling for both mean and attention models.
 
 The two-song run is an engineering overfit check: it verifies that both weak-label training paths execute and reduce loss, but it has no held-out artists and makes no generalisation claim. Full tables, figures, commands and limitations are on the [GitHub Project Site](https://decarre.github.io/elec5305-project-550275044/).
+
+The exact relationship between the published AttentionMIC aggregation and this
+controlled implementation is documented in [the implementation map](docs/attentionmic_mapping.md).
 
 ## Current challenges and points for feedback
 

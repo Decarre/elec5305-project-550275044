@@ -1,8 +1,8 @@
 # Weakly Supervised Temporal Localisation of Musical Instruments
 
-**Ryan Hu · SID 550275044 · progress update: 4 October 2026**
+**Ryan Hu · SID 550275044 · progress update: 5 October 2026**
 
-[Repository](https://github.com/Decarre/elec5305-project-550275044) · [original proposal PDF](https://github.com/Decarre/elec5305-project-550275044/blob/main/ELEC5305_Project_Proposal_550275044.pdf)
+[Repository](https://github.com/Decarre/elec5305-project-550275044) · [Project Feedback Two PDF](https://github.com/Decarre/elec5305-project-550275044/blob/main/output/pdf/ELEC5305_Project_Feedback_Two_550275044.pdf) · [original proposal PDF](https://github.com/Decarre/elec5305-project-550275044/blob/main/ELEC5305_Project_Proposal_550275044.pdf)
 
 ## Research question
 
@@ -24,6 +24,17 @@ This wording reflects an important distinction raised in feedback. A frame class
 
 MedleyDB stem activation confidence is reserved for temporal evaluation. These annotations are automatically derived from isolated stems, so they are useful references rather than perfect manual frame labels. Frame precision, recall and F1 at a stated time grid will be primary; event and onset/offset results will be secondary.
 
+## How the first feedback was incorporated
+
+| Feedback direction | Implemented evidence |
+|---|---|
+| Start from published AttentionMIC code | Published aggregation and local modifications are separated in the [implementation map](attentionmic_mapping.html). |
+| Do not treat attention as activity probability | Frame probabilities, attention weights and weighted contributions are exposed and evaluated as distinct signals. |
+| Use an artist-level split before clipping | Deterministic artist assignment and leakage checks run before track windows are added to the clip manifest. |
+| Keep pooling comparisons controlled | Mean, max and attention models share the frame encoder and aggregate the same bounded frame probabilities. |
+| Select post-processing on validation data | Per-class validation thresholds are saved in the best checkpoint and reused unchanged by evaluation. |
+| Keep temporal labels hidden during training | The training NPZ interface accepts only spectrogram features and clip-level labels. |
+
 ## Work completed to date
 
 ### Published-code study and model implementation
@@ -34,7 +45,26 @@ The project now uses the aggregation structure in the published [AttentionMIC im
 - `attention_weights[t, c]`: relative weights satisfying `sum_t weight[t,c] = 1`;
 - `clip_probabilities[c]`: the attention-weighted sum of frame scores.
 
-The mean and attention models share the same convolutional frame encoder. Automated tests cover model shapes, attention normalisation, configuration validation and temporal post-processing; all **5 tests pass** in the current environment.
+The mean and attention models share the same convolutional frame encoder. The
+mean baseline averages the same bounded frame probabilities that the attention
+model weights, so the comparison changes only temporal aggregation. A detailed
+[AttentionMIC implementation map](attentionmic_mapping.html) separates the
+published aggregation rule from local architectural choices. Automated tests
+cover model semantics, manifests, metrics, training/checkpoint reload and
+temporal post-processing; all **13 tests pass** in the current environment.
+
+### Reproducible experiment framework
+
+The repository now contains deterministic, class-aware artist splits and
+track/clip manifests with stable hashes. Clips are created after splitting, and
+the training NPZ interface contains log-mel features and clip labels only. The
+time-aligned activity references stay outside the training interface.
+
+The command-line workflow validates configuration, trains a selected pooling
+model, chooses class thresholds on validation data, saves those thresholds in
+the best checkpoint, and evaluates later data with the stored values unchanged.
+This makes the planned held-out experiment auditable when full MedleyDB access
+becomes available.
 
 ### MedleyDB metadata audit
 
@@ -75,10 +105,10 @@ An end-to-end engineering check was run on 230 non-overlapping two-second clips 
 
 | Model | Initial training BCE | Final training BCE | Training micro-F1 | Training macro-F1 |
 |---|---:|---:|---:|---:|
-| mean pooling | 0.4665 | 0.0142 | 0.9989 | 0.9987 |
+| mean pooling | 0.4715 | 0.0357 | 0.8721 | 0.7717 |
 | attention pooling | 0.4509 | 0.0135 | 0.9977 | 0.9967 |
 
-These are **training-set overfit diagnostics**. Training and evaluation used the same two songs, guitar is positive in every clip, and only two artists are available. The values demonstrate that feature extraction, weak-label training and both aggregation paths run end to end; they do not estimate generalisation and cannot establish that one pooling method is better.
+These are **training-set overfit diagnostics**. Training and evaluation used the same two songs, guitar is positive in every clip, and only two artists are available. The mean result changed from the earlier pilot because the corrected controlled baseline averages frame probabilities rather than applying a sigmoid after averaging logits. The values demonstrate that feature extraction, weak-label training and both aggregation paths run end to end; they do not estimate generalisation and cannot establish that one pooling method is better.
 
 The figure below illustrates why the temporal signals must be separated. The reference confidence, each model's frame score and the attention weight are different quantities. Although the model was given only a positive clip label, its frame score and attention may emphasize different parts of the clip.
 
