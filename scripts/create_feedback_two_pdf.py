@@ -115,7 +115,7 @@ def build_pdf(output_path=OUTPUT):
         canvas.line(18 * mm, 13 * mm, 192 * mm, 13 * mm)
         canvas.setFont("Helvetica", 7.5)
         canvas.setFillColor(muted)
-        canvas.drawString(18 * mm, 8.5 * mm, "ELEC5305 Project Feedback Two - prepared 5 October 2026")
+        canvas.drawString(18 * mm, 8.5 * mm, "ELEC5305 Project Feedback Two - prepared 9 October 2026")
         canvas.drawRightString(192 * mm, 8.5 * mm, f"Page {document.page}")
         canvas.restoreState()
 
@@ -161,38 +161,38 @@ def build_pdf(output_path=OUTPUT):
         [
             Paragraph("Brief project description", heading),
             Paragraph(
-                "This project investigates whether a weakly supervised multi-label audio model can identify "
-                "instruments in polyphonic music and recover when each instrument is active. A shared frame "
-                "encoder is used for a controlled comparison of global mean pooling and instrument-specific "
-                "attention pooling. Models receive clip-level instrument labels during training; time-aligned "
-                "MedleyDB activation confidence is reserved for temporal evaluation.",
+                "This project studies whether a weakly supervised audio model can recognise instruments in "
+                "polyphonic music and show when each instrument is active. The model learns from instrument "
+                "labels for a whole audio clip, without using frame-level timing labels during training. I compare "
+                "mean pooling with instrument-specific attention while keeping the audio features and frame "
+                "encoder the same.",
                 body,
             ),
             Paragraph("Achievements to date", heading),
             Paragraph(
-                "<b>Implementation:</b> log-mel feature extraction; matched mean, max and AttentionMIC-style "
-                "models; separate frame probabilities, attention weights and clip predictions; temporal "
-                "post-processing; and a validate/train/evaluate command-line workflow.",
+                "<b>Implementation:</b> I completed log-mel feature extraction, matched mean, max and "
+                "AttentionMIC-style models, temporal post-processing, and a command-line workflow for "
+                "validation, training and evaluation.",
                 bullet,
                 bulletText="-",
             ),
             Paragraph(
-                "<b>Leakage prevention:</b> deterministic class-aware artist splits, stable track/clip "
-                "manifests created after splitting, validation-only threshold selection, checkpoint reload, "
-                "and frozen-threshold test evaluation.",
+                "<b>Fair evaluation:</b> the pipeline supports artist-separated data splits, stable track and "
+                "clip lists, validation-only threshold selection, saved model checkpoints, and one final test "
+                "evaluation with fixed thresholds.",
                 bullet,
                 bulletText="-",
             ),
             Paragraph(
-                "<b>Dataset audit:</b> official MedleyDB v1/v2 metadata contains 196 tracks from 116 artists; "
-                "117 tracks have matching v2 activation-confidence files. Both public sample mixes and all "
-                "eight expected instrument stems passed audio/annotation alignment checks.",
+                "<b>Dataset audit:</b> the official MedleyDB v1/v2 metadata contains 196 tracks from 116 "
+                "artists. In total, 117 tracks have matching time-based activation files. The two public sample "
+                "songs also passed the audio and annotation checks.",
                 bullet,
                 bulletText="-",
             ),
             Paragraph(
-                "<b>Verification:</b> 13 automated tests pass, covering model aggregation semantics, metrics, "
-                "artist-disjoint manifests, checkpoint behaviour and temporal processing.",
+                "<b>Verification:</b> all 13 automated tests pass. They check model pooling, metrics, "
+                "artist-separated data lists, saved checkpoints and temporal processing.",
                 bullet,
                 bulletText="-",
             ),
@@ -227,18 +227,26 @@ def build_pdf(output_path=OUTPUT):
             result_table,
             Spacer(1, 1.2 * mm),
             Paragraph(
-                "These values are training-set diagnostics from 230 non-overlapping two-second clips from two "
-                "public sample songs. Training and measurement used the same clips. They verify the two model "
-                "paths end to end and do not estimate generalisation or establish model superiority.",
+                "These values are engineering checks from 230 non-overlapping two-second clips taken from two "
+                "public sample songs. The same clips were used for training and measurement. Therefore, the "
+                "results confirm that the pipeline works, but they do not show performance on unseen music.",
                 small,
             ),
             Paragraph("Current limitation and next step", heading),
             Paragraph(
-                "Access to the full MedleyDB audio has been requested and is awaiting approval. After access is "
-                "granted, complete artists will be assigned to train, validation and test before clipping. "
-                "Thresholds and temporal post-processing will be selected only on validation artists, then "
-                "clip-level and frame-level metrics will be reported once on held-out artists.",
+                "Access to the full MedleyDB audio has been requested and is still waiting for approval. If it "
+                "is approved, complete artists will be separated into training, validation and test sets before "
+                "the audio is divided into clips. If access is delayed, the duplicate-free Slakh2100-redux split "
+                "will be used for the main quantitative experiment.",
                 body,
+            ),
+            Paragraph("AI usage statement", heading),
+            Paragraph(
+                "I used OpenAI Codex to help plan the workflow, draft and revise Python code, debug the local "
+                "environment, prepare tests, and improve the English in this progress report. I checked the code, "
+                "test outputs, links and reported numbers against the repository files. I made the final project "
+                "decisions and remain responsible for the submitted work. AI was not used to create experimental data.",
+                small,
             ),
             KeepTogether(
                 [
