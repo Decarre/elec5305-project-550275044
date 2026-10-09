@@ -14,3 +14,22 @@ path/to/MedleyDB_sample/   Separately downloaded public two-track sample
 path/to/MedleyDB/          Full audio after access is granted
 ```
 
+## Prepared fallback
+
+If MedleyDB access is still pending at the project decision gate, the main
+quantitative experiment switches to the duplicate-free `Slakh2100-redux`
+release. Expected local resources are:
+
+```text
+path/to/Slakh2100-redux/
+  train/TrackXXXXX/{mix.flac,metadata.yaml,MIDI/,stems/}
+  validation/TrackXXXXX/{mix.flac,metadata.yaml,MIDI/,stems/}
+  test/TrackXXXXX/{mix.flac,metadata.yaml,MIDI/,stems/}
+path/to/slakh-utils/splits/redux.json
+```
+
+Start with the official tiny subset to validate the adapter. Do not use the
+original Slakh split without checking duplicate MIDI files across partitions.
+See [`DATASET_FALLBACK_PLAN.md`](../DATASET_FALLBACK_PLAN.md) for the activation
+date, leakage barrier, temporal references and experiment checkpoints.
+

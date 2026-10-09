@@ -1,6 +1,6 @@
 # Project optimization and continuation plan
 
-**Purpose:** Keep the ELEC5305 project resumable if a Codex session or usage allowance ends. Work is divided into independently testable Git checkpoints. Do not claim full-data performance until MedleyDB access is approved and a held-out artist evaluation has run.
+**Purpose:** Keep the ELEC5305 project resumable if a Codex session or usage allowance ends. Work is divided into independently testable Git checkpoints. Do not claim full-data performance until a held-out MedleyDB or duplicate-safe Slakh evaluation has run.
 
 ## Resume procedure
 
@@ -106,7 +106,7 @@ Acceptance gate:
 - Notebook dry run completes without full audio.
 - A small authorized subset can complete train/tune/evaluate end to end.
 
-## Phase 6: full MedleyDB experiment after approval
+## Phase 6A: full MedleyDB experiment after approval
 
 **Status:** blocked only on dataset-owner approval.
 
@@ -121,6 +121,19 @@ Execution:
 7. Report clip/frame micro, macro and per-class precision/recall/F1.
 8. Evaluate attention as a relative/ranking signal and analyse instrument co-occurrence and failures.
 9. Publish aggregate tables and derived figures only.
+
+## Phase 6B: Slakh2100 fallback if MedleyDB remains pending
+
+**Status:** prepared; activation gate is 16 October 2026 at 18:00 Sydney.
+
+Use the duplicate-free `Slakh2100-redux` split as the main quantitative dataset.
+Keep the weak-supervision protocol unchanged: train from clip-level labels, hold
+aligned MIDI/stem activity out of the training interface, tune on validation
+tracks and evaluate the test split once. Replace the artist barrier with a
+composition/UUID barrier.
+
+The complete decision rule, implementation checkpoints, evaluation references
+and reporting limitations are in `DATASET_FALLBACK_PLAN.md`.
 
 ## Deferred extensions
 
@@ -139,3 +152,4 @@ These begin only after the main weak-supervision experiment is complete.
 - 2026-10-04: Phase 3 training/checkpoint engine committed and pushed as `233f330`; validation thresholds are stored in the checkpoint and reused unchanged for evaluation.
 - 2026-10-04: Phase 3 validation/train/evaluate CLI committed and pushed as `ad61382`; legacy dry-run configuration validation remains available.
 - 2026-10-05: Phase 4 controlled public-sample rerun completed; all 13 tests pass and the README, Project Site and AttentionMIC implementation map were synchronised to the saved artifacts.
+- 2026-10-09: Phase 6B contingency prepared. If MedleyDB is still pending at the 16 October gate, Slakh2100-redux becomes the frozen main dataset; the final Project is due 6 November 2026 at 23:59 Sydney.
