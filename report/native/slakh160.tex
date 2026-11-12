@@ -2,7 +2,7 @@
 \label{sec:slakh160}
 
 \subsection{Data and training}
-The follow-up samples tracks with seed 5305 from the official Slakh2100-redux training, validation and test partitions \cite{slakh}. The pinned download manifest identifies all tracks and source files. An assertion checks that identical full-track MIDI hashes do not cross partitions. Mono audio is resampled to 16\,kHz and split into complete five-second clips. Each clip has an original mix, a two-family absence mix and a mix with controlled starts or stops. The 120 training, 20 validation and 20 test tracks yield 17,670, 2,985 and 3,051 examples including all variants. The test partition contains 1,017 original clips.
+The follow-up samples tracks with seed 5305 from the official Slakh2100-redux training, validation and test partitions \cite{slakhredux}. The pinned download manifest identifies all tracks and source files. An assertion checks that identical full-track MIDI hashes do not cross partitions. Mono audio is resampled to 16\,kHz and split into complete five-second clips. Each clip has an original mix, a two-family absence mix and a mix with controlled starts or stops. The 120 training, 20 validation and 20 test tracks yield 17,670, 2,985 and 3,051 examples including all variants. The test partition contains 1,017 original clips.
 
 Mean, max and attention pooling use the same encoder and clip-label loss. Each model was trained once with seed 5305. Checkpoints were selected by validation clip macro balanced accuracy. Frame thresholds were calibrated on the validation MIDI references and fixed for test evaluation. Event scoring uses a 0.5\,s tolerance at both endpoints with clip-edge censoring, as in the BabySlakh follow-up.
 
