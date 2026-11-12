@@ -1,0 +1,17 @@
+{
+  "baseline": {
+    "controlled_frame_ba": 0.6822674492477603,
+    "controlled_frame_ba_seed_sd": 0.0,
+    "original_frame_ba": 0.6893200849026759
+  },
+  "max": {
+    "controlled_frame_ba": 0.6522479357912389,
+    "controlled_frame_ba_seed_sd": 0.0,
+    "original_frame_ba": 0.6349715881327659
+  },
+  "attention": {
+    "controlled_frame_ba": 0.6987324187683526,
+    "controlled_frame_ba_seed_sd": 0.0,
+    "original_frame_ba": 0.7069037657249664
+  }
+}

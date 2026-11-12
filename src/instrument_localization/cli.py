@@ -31,6 +31,7 @@ def build_parser() -> argparse.ArgumentParser:
     train.add_argument("--validation-data", type=Path, required=True)
     train.add_argument("--output-dir", type=Path, required=True)
     train.add_argument("--device", choices=("cpu", "cuda"))
+    train.add_argument('--selection-objective',choices=('f1','balanced_accuracy'),default='f1')
 
     evaluate = subparsers.add_parser(
         "evaluate", help="Evaluate a checkpoint using its frozen validation thresholds"
@@ -39,6 +40,11 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--data", type=Path, required=True)
     evaluate.add_argument("--output-json", type=Path, required=True)
     evaluate.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
+    predict = subparsers.add_parser('predict',help='Predict activity from an audio file')
+    predict.add_argument('--audio',type=Path,required=True)
+    predict.add_argument('--checkpoint',type=Path,required=True)
+    predict.add_argument('--calibration',type=Path,required=True)
+    predict.add_argument('--output-dir',type=Path,required=True)
     return parser
 
 
@@ -58,6 +64,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(json.dumps(load_config(args.config).to_dict(), indent=2))
         return 0
 
+    if args.command == 'predict':
+        from .inference import predict_audio
+        result=predict_audio(args.audio,args.checkpoint,args.calibration,args.output_dir)
+        print(json.dumps({'duration_seconds':result['duration_seconds'],'interval_count':len(result['intervals']),'output_dir':str(args.output_dir)},indent=2))
+        return 0
+
     from .training import evaluate_checkpoint, load_npz_dataset, train_arrays
 
     if args.command == "train":
@@ -73,6 +85,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             args.output_dir,
             patience=config.early_stopping_patience,
             device=args.device,
+            selection_objective=args.selection_objective,
         )
         print(json.dumps(summary, indent=2))
         return 0

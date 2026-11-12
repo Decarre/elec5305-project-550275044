@@ -1,0 +1,13 @@
+\begin{table}[H]\centering\small
+\caption{Retrospective factorial comparison on the controlled test distribution. Means and sample SD over three seeds. All cells use the same validation-balanced frame threshold protocol. The original architecture winner is unchanged.}\label{tab:factorial}
+\begin{tabular}{lllrr}\toprule
+Model & Training data & Clip selection & Frame BA & Micro F1 \\\midrule
+baseline & original & F1 & $0.559 \pm 0.013$ & 0.636 \\
+baseline & original & BA & $0.568 \pm 0.006$ & 0.676 \\
+baseline & controlled & F1 & $0.589 \pm 0.005$ & 0.655 \\
+baseline & controlled & BA & $0.589 \pm 0.005$ & 0.655 \\
+attention & original & F1 & $0.570 \pm 0.013$ & 0.643 \\
+attention & original & BA & $0.584 \pm 0.007$ & 0.681 \\
+attention & controlled & F1 & $0.620 \pm 0.003$ & 0.697 \\
+attention & controlled & BA & $0.629 \pm 0.011$ & 0.702 \\
+\bottomrule\end{tabular}\end{table}

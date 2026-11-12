@@ -1,0 +1,10 @@
+{
+  "checkpoint_sha256": "016b2b4405edf9047422cc7b987ac3284917d4fae8d93a4b48d2496ba5381653",
+  "frame_thresholds": [
+    0.05,
+    0.15,
+    0.05,
+    0.1
+  ],
+  "preprocessing_version": "logmel-relative-max-clip80-div80-v1"
+}

@@ -1,0 +1,27 @@
+\begin{table}[H]\centering\small
+\caption{Attention-network signal comparison across three seeds. Separate validation-F1 calibration; retrospective descriptive test analysis.}
+\begin{tabular}{lrrrrr}\toprule
+Signal & Micro P & Micro R & Micro F1 & Macro F1 & Macro BA \\\midrule
+frame & 0.630 & 0.878 & 0.733 & 0.718 & 0.603 \\
+attention & 0.587 & 0.931 & 0.720 & 0.714 & 0.542 \\
+contribution & 0.607 & 0.875 & 0.715 & 0.710 & 0.577 \\
+\bottomrule\end{tabular}\end{table}
+\begin{table}[H]\centering\small
+\caption{Mean class/seed alignment on positive clips. Lift is averaged per clip, not computed as the ratio of the displayed means. Contribution is time-normalised.}
+\begin{tabular}{lrrr}\toprule
+Signal / scene & Active mass & Active fraction & Lift \\\midrule
+attention / original & 0.928 & 0.906 & 1.055 \\
+attention / absence & 0.919 & 0.895 & 1.075 \\
+attention / transition & 0.681 & 0.466 & 1.519 \\
+contribution / original & 0.925 & 0.906 & 1.039 \\
+contribution / absence & 0.912 & 0.895 & 1.034 \\
+contribution / transition & 0.712 & 0.466 & 1.597 \\
+\bottomrule\end{tabular}\end{table}
+\begin{table}[H]\centering\small
+\caption{Primary frame precision, recall and F1 at the unchanged validation-balanced operating points of the controlled comparison.}
+\begin{tabular}{lrrrrrr}\toprule
+Model & Micro P & Micro R & Micro F1 & Macro P & Macro R & Macro F1 \\\midrule
+baseline & 0.615 & 0.700 & 0.655 & 0.636 & 0.705 & 0.647 \\
+attention & 0.658 & 0.754 & 0.702 & 0.656 & 0.743 & 0.689 \\
+max & 0.654 & 0.580 & 0.587 & 0.700 & 0.583 & 0.576 \\
+\bottomrule\end{tabular}\end{table}

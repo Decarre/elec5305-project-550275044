@@ -1,0 +1,8 @@
+\begin{table}[H]\centering\small
+\caption{Test performance: mean and sample standard deviation over three training seeds on one fixed split. The deterministic baseline has no seed variability.}\label{tab:main}
+\begin{tabular}{lrrrr}\toprule
+Model & \shortstack{Clip\\micro-F1} & \shortstack{Clip\\macro-F1} & \shortstack{Frame\\micro-F1} & \shortstack{Frame\\macro-F1} \\\midrule
+Mean & $0.946 \pm 0.012$ & $0.942 \pm 0.015$ & $0.910 \pm 0.004$ & $0.902 \pm 0.006$ \\
+Attention & $0.950 \pm 0.008$ & $0.948 \pm 0.009$ & $0.910 \pm 0.011$ & $0.901 \pm 0.018$ \\
+Always positive & 0.962 & 0.961 & 0.915 & 0.910 \\
+\bottomrule\end{tabular}\end{table}

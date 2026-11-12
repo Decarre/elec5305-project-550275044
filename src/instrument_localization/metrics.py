@@ -50,19 +50,55 @@ def multilabel_metrics(
         tp = int(np.sum(predicted[:, index] & truth[:, index]))
         fp = int(np.sum(predicted[:, index] & ~truth[:, index]))
         fn = int(np.sum(~predicted[:, index] & truth[:, index]))
+        tn = int(np.sum(~predicted[:, index] & ~truth[:, index]))
         totals.add(tp, fp, fn)
-        per_class.append(_row(name, tp, fp, fn, threshold_values[index]))
+        row = _row(name, tp, fp, fn, threshold_values[index])
+        row.update(negative_metrics(tp, fp, fn, tn))
+        per_class.append(row)
     micro = _row("micro", totals.tp, totals.fp, totals.fn, None)
     macro = {
         metric: float(np.mean([row[metric] for row in per_class]))
         for metric in ("precision", "recall", "f1")
     }
+    micro.update(negative_metrics(totals.tp, totals.fp, totals.fn, sum(r['tn'] for r in per_class)))
+    for key in ('specificity', 'false_positive_rate', 'negative_f1', 'balanced_accuracy'):
+        defined = [r[key] for r in per_class if r[key] is not None]
+        macro[key] = float(np.mean(defined)) if defined else None
     return {
         "samples": int(truth.shape[0]),
         "per_class": per_class,
         "micro": micro,
         "macro": macro,
     }
+
+
+def negative_metrics(tp, fp, fn, tn):
+    """Undefined rates stay None; balanced accuracy requires both classes."""
+    specificity = tn / (tn + fp) if tn + fp else None
+    recall = tp / (tp + fn) if tp + fn else None
+    return {
+        'tn': tn,
+        'specificity': specificity,
+        'false_positive_rate': fp / (fp + tn) if fp + tn else None,
+        'negative_f1': 2 * tn / (2 * tn + fp + fn) if 2 * tn + fp + fn else 0.0,
+        'balanced_accuracy': (recall + specificity) / 2 if recall is not None and specificity is not None else None,
+    }
+
+
+def select_balanced_thresholds(targets, probabilities):
+    """Validation-only threshold selection, with an explicit missing-class fallback."""
+    truth, scores = _as_samples(targets), _as_samples(probabilities)
+    selected = []
+    for c in range(truth.shape[1]):
+        if len(np.unique(truth[:, c])) < 2:
+            selected.append(0.5)
+            continue
+        candidates = []
+        for threshold in np.linspace(0.05, 0.95, 19):
+            value = multilabel_metrics(truth[:, c:c+1], scores[:, c:c+1], threshold)['micro']['balanced_accuracy']
+            candidates.append((value, -abs(threshold - 0.5), -threshold, threshold))
+        selected.append(max(candidates)[-1])
+    return np.asarray(selected)
 
 
 class CounterLike:
@@ -143,11 +179,26 @@ def attention_alignment(
     for index, name in enumerate(names):
         valid = reference[:, :, index].any(axis=1)
         mass = (attention[:, :, index] * reference[:, :, index]).sum(axis=1)
+        active_fraction = reference[:, :, index].mean(axis=1)
+        # A value of 1.0 is the mass expected from uniform attention. This is
+        # a relative concentration diagnostic, not an activity probability.
+        lift = np.divide(
+            mass,
+            active_fraction,
+            out=np.full_like(mass, np.nan, dtype=np.float64),
+            where=active_fraction > 0,
+        )
         rows.append({
             "class": name,
             "positive_clips": int(valid.sum()),
             "mean_attention_mass_on_active_frames": (
                 float(mass[valid].mean()) if valid.any() else None
+            ),
+            "mean_active_frame_fraction": (
+                float(active_fraction[valid].mean()) if valid.any() else None
+            ),
+            "mean_attention_lift_over_uniform": (
+                float(np.nanmean(lift[valid])) if valid.any() else None
             ),
         })
     valid_values = [row["mean_attention_mass_on_active_frames"] for row in rows]

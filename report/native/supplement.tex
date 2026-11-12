@@ -1,0 +1,24 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,graphicx,booktabs,float,microtype}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\input{tables/factorial_macros}
+\begin{document}
+\begin{center}\Large\bfseries ELEC5305 Project: Supplementary Diagnostics\end{center}
+\begin{center}Ryan Hu -- SID 550275044 -- Review V4\end{center}
+\input{diagnostics}
+\input{ablation_v4}
+\section*{Reproduction and scope}
+All diagnostic CSV files are in \code{results/diagnostics_v3}. The data-root and
+checkpoint-root parameters are explicit in \code{scripts/analyse_localisation_signals.py}.
+The original v2 runs, model choice and test calibration remain unchanged.
+See \code{REPRODUCE.md} for audio inference and the native report build.
+\begin{figure}[H]\centering
+\includegraphics[width=.70\linewidth]{figures/temporal_example.png}
+\caption{Historical attention seed 5305 example, Track00012 at 300 s. Selected by reference variation, not model success. Piano becomes inactive near three seconds while other sources remain active; several scores decline together. This does not establish instrument-specific boundary discrimination.}
+\end{figure}
+\end{document}

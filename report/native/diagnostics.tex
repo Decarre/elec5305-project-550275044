@@ -1,0 +1,20 @@
+\subsection*{Additional frozen-checkpoint diagnostics}
+The following analysis completes the comparison of frame scores, attention and relative weighted contribution on the controlled data. It reuses the already inspected v2 test tracks and is therefore a descriptive follow-up, not a new independent test. No network was retrained and the original v2 architecture-selection decision remains unchanged.
+
+The contribution signal is $a_{tc}p_{tc}$, summed into physical time bins and normalised over retained time for the alignment comparison. It indicates the relative distribution of class evidence, not calibrated activity. Because the scales of these signals differ, the diagnostic F1 table selects a separate threshold for each signal and class on validation data. Its operating points differ from the validation-balanced thresholds in the main results and must not be conflated with them.
+\input{tables/signals_v3}
+On the controlled transition scenes, attention and weighted contribution can concentrate more mass on active intervals than uniform weights. A lift greater than one establishes relative alignment under these artificial interventions; it does not imply reliable presence/absence estimation. The diagnostic F1 comparison and the per-scene active fractions are needed to interpret that alignment. Neither the lift nor a single illustrative example proves that the model has isolated each instrument's causal acoustic evidence.
+
+Validation-only sensitivity varies threshold offset by $\pm0.10$ and edge-padded smoothing across one, three and five 0.5 s bins. The table reports these perturbations without adopting a new test operating point. This separates investigation of robustness from test-set optimisation. Event extraction remains contiguous positive bins without gap merging or duration filtering; its grid and matching tolerance are fixed and explicitly reported.
+\input{tables/sensitivity_v3}
+
+\subsection*{Audible cases and runnable prototype}
+Two original validation excerpts are provided with audio, log-mel views, MIDI activity and predictions. They are selected as the highest and lowest clip F1 among excerpts containing a reference transition; silence-only clips are excluded. They deliberately illustrate a success and a failure and are not used as representative test statistics. The report bundle includes the case-selection record and the presentation plays both sounds.
+
+\begin{figure}[H]\centering
+\includegraphics[width=.47\linewidth]{figures/success_validation.png}\hfill
+\includegraphics[width=.47\linewidth]{figures/failure_validation.png}
+\caption{Deliberately selected validation success and failure. Top: log-mel feature; middle: reference activity; bottom: frame scores. Companion five-second WAV excerpts are supplied for listening. These synthetic excerpts do not establish real-recording performance.}
+\end{figure}
+
+The new \code{predict} command loads audio, resamples to the checkpoint rate, applies the same clipped and scaled log-mel transform used in training, and exports a timeline CSV, interval JSON and plot. Its calibration file is bound to the checkpoint SHA-256. Padded final clips are truncated to actual audio duration in the output. This is an executable research prototype; frame scores should not be presented as calibrated probabilities or reliable predictions for arbitrary real music.

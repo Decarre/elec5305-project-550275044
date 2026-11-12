@@ -1,0 +1,14 @@
+{
+  "train": {
+    "tracks": 120,
+    "clips_with_variants": 17670
+  },
+  "validation": {
+    "tracks": 20,
+    "clips_with_variants": 2985
+  },
+  "test": {
+    "tracks": 20,
+    "clips_with_variants": 3051
+  }
+}

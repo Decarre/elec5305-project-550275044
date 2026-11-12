@@ -1,0 +1,22 @@
+sample_rate: 16000
+n_mels: 64
+n_fft: 1024
+hop_length: 320
+clip_duration: 5.0
+analysis_hop: 5.0
+target_instruments:
+  - drums
+  - bass
+  - guitar
+  - piano
+decision_threshold: 0.5
+smoothing_frames: 3
+minimum_event_duration: 0.5
+model_type: attention
+hidden_size: 64
+batch_size: 32
+epochs: 30
+learning_rate: 0.001
+seed: 5305
+reporting_grid_seconds: 0.5
+early_stopping_patience: 6

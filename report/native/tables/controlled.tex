@@ -1,0 +1,11 @@
+\begin{table}[H]\centering\small
+\caption{Controlled test frame precision, recall and F1, with imbalance-aware complements. Means across three seeds; operating points are fixed by controlled validation. See the supplement and saved results for variability and negative-class F1.}\label{tab:controlled}
+\begin{tabular}{lrrrrrr}\toprule
+Model & Micro P & Micro R & Micro F1 & Macro F1 & Macro BA & Specificity \\\midrule
+baseline & 0.615 & 0.700 & 0.655 & 0.647 & 0.589 & 0.472 \\
+attention & 0.658 & 0.754 & 0.702 & 0.689 & 0.629 & 0.515 \\
+max & 0.654 & 0.580 & 0.587 & 0.576 & 0.609 & 0.635 \\
+always positive & 0.562 & 1.000 & 0.720 & 0.716 & 0.500 & 0.000 \\
+always negative & 0.000 & 0.000 & 0.000 & 0.000 & 0.500 & 1.000 \\
+training prevalence & 0.562 & 1.000 & 0.720 & 0.716 & 0.500 & 0.000 \\
+\bottomrule\end{tabular}\end{table}

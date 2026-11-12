@@ -9,7 +9,7 @@ from typing import Dict, Optional, Sequence, Tuple
 import numpy as np
 
 from .config import ExperimentConfig
-from .metrics import multilabel_metrics, select_f1_thresholds
+from .metrics import multilabel_metrics, select_f1_thresholds, select_balanced_thresholds
 from .models import AttentionInstrumentModel, BaselineInstrumentModel, MaxInstrumentModel
 
 try:
@@ -57,7 +57,9 @@ def validate_arrays(
         raise ValueError("feature mel dimension does not match config")
     if labels.shape[1] != len(config.target_instruments):
         raise ValueError("label class dimension does not match config")
-    if not np.isfinite(features).all() or not np.isfinite(labels).all():
+    if (not all(np.isfinite(features[start:start + 256]).all()
+                for start in range(0, len(features), 256))
+            or not np.isfinite(labels).all()):
         raise ValueError("features and labels must be finite")
     if np.any((labels < 0) | (labels > 1)):
         raise ValueError("labels must be in [0, 1]")
@@ -85,8 +87,12 @@ def train_arrays(
     class_names: Optional[Sequence[str]] = None,
     patience: Optional[int] = None,
     device: Optional[str] = None,
+    selection_objective: str = 'f1',
 ) -> Dict[str, object]:
     """Train one model and tune decision thresholds on validation data only."""
+
+    if selection_objective not in ('f1','balanced_accuracy'):
+        raise ValueError('unknown validation selection objective')
 
     train_features, train_labels = validate_arrays(train_features, train_labels, config)
     validation_features, validation_labels = validate_arrays(
@@ -135,7 +141,8 @@ def train_arrays(
         probabilities = predict_probabilities(
             model, validation_features, config.batch_size, selected_device
         )
-        thresholds = select_f1_thresholds(validation_labels, probabilities)
+        selector = select_balanced_thresholds if selection_objective == 'balanced_accuracy' else select_f1_thresholds
+        thresholds = selector(validation_labels, probabilities)
         metrics = multilabel_metrics(validation_labels, probabilities, thresholds, names)
         macro_f1 = float(metrics["macro"]["f1"])
         history.append({
@@ -143,8 +150,10 @@ def train_arrays(
             "training_bce": loss_sum / len(x_train),
             "validation_macro_f1": macro_f1,
             "validation_micro_f1": float(metrics["micro"]["f1"]),
+            "validation_balanced_accuracy": metrics['macro']['balanced_accuracy'],
         })
-        candidate = (macro_f1, -history[-1]["training_bce"])
+        selection_value = metrics['macro']['balanced_accuracy'] if selection_objective == 'balanced_accuracy' else macro_f1
+        candidate = (selection_value, -history[-1]["training_bce"])
         if best is None or candidate > best["selection"]:
             best = {
                 "selection": candidate,
@@ -163,6 +172,8 @@ def train_arrays(
 
     checkpoint = {
         "format_version": 1,
+        "selection_objective": selection_objective,
+        "preprocessing_note": 'array interface: caller must supply features matching its documented preprocessing contract',
         "config": config.to_dict(),
         "class_names": names,
         "best_epoch": best["epoch"],

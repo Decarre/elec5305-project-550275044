@@ -1,0 +1,113 @@
+{
+  "success": {
+    "track": "Track01661",
+    "clip_start_seconds": 255,
+    "reference": {
+      "drums": [
+        [
+          2.5,
+          5.0
+        ]
+      ],
+      "bass": [
+        [
+          2.5,
+          5.0
+        ]
+      ],
+      "guitar": [],
+      "piano": [
+        [
+          0.0,
+          5.0
+        ]
+      ]
+    },
+    "focus": "bass",
+    "focus_interval": [
+      2.5,
+      5.0
+    ],
+    "prediction": {
+      "drums": [
+        [
+          2.5,
+          4.5
+        ]
+      ],
+      "bass": [
+        [
+          2.5,
+          5.0
+        ]
+      ],
+      "guitar": [],
+      "piano": [
+        [
+          0.0,
+          3.0
+        ]
+      ]
+    }
+  },
+  "failure": {
+    "track": "Track01654",
+    "clip_start_seconds": 100,
+    "reference": {
+      "drums": [
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "bass": [
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "guitar": [
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "piano": [
+        [
+          3.0,
+          5.0
+        ]
+      ]
+    },
+    "focus": "piano",
+    "focus_interval": [
+      3.0,
+      5.0
+    ],
+    "prediction": {
+      "drums": [
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "bass": [
+        [
+          0.0,
+          5.0
+        ]
+      ],
+      "guitar": [
+        [
+          0.0,
+          1.5
+        ],
+        [
+          2.0,
+          4.5
+        ]
+      ],
+      "piano": []
+    }
+  }
+}

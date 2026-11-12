@@ -21,3 +21,5 @@ def test_attention_alignment_reports_active_mass():
     attention = np.array([[[0.4], [0.3], [0.2], [0.1]]])
     result = attention_alignment(reference, attention, ["guitar"])
     assert np.isclose(result["per_class"][0]["mean_attention_mass_on_active_frames"], 0.7)
+    assert np.isclose(result["per_class"][0]["mean_active_frame_fraction"], 0.5)
+    assert np.isclose(result["per_class"][0]["mean_attention_lift_over_uniform"], 1.4)

@@ -45,3 +45,13 @@ def log_mel_spectrogram(
     )
     return np.asarray(librosa.power_to_db(mel_power, ref=np.max), dtype=np.float32)
 
+
+PREPROCESSING_VERSION = 'logmel-relative-max-clip80-div80-v1'
+
+
+def checkpoint_features(waveform, config):
+    """Canonical BabySlakh model input, identical to the original preparation."""
+    db = log_mel_spectrogram(waveform, config.sample_rate, config.n_mels,
+                             config.n_fft, config.hop_length)
+    return np.clip(db, -80.0, 0.0).astype(np.float32) / 80.0
+

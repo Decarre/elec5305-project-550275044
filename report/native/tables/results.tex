@@ -1,0 +1,30 @@
+\begin{table}[htbp]\centering\small
+\caption{Test performance: mean and sample standard deviation over three training seeds on one fixed split. The deterministic baseline has no seed variability.}\label{tab:main}
+\begin{tabular}{lrrrr}\toprule
+Model & \shortstack{Clip\\micro-F1} & \shortstack{Clip\\macro-F1} & \shortstack{Frame\\micro-F1} & \shortstack{Frame\\macro-F1} \\\midrule
+Mean & $0.946 \pm 0.012$ & $0.942 \pm 0.015$ & $0.910 \pm 0.004$ & $0.902 \pm 0.006$ \\
+Attention & $0.950 \pm 0.008$ & $0.948 \pm 0.009$ & $0.910 \pm 0.011$ & $0.901 \pm 0.018$ \\
+Always positive & 0.962 & 0.961 & 0.915 & 0.910 \\
+\bottomrule\end{tabular}\end{table}
+
+\begin{table}[htbp]\centering\small
+\caption{Frame F1 by class, averaged across seeds. Positive counts are recovered from TP+FN and agree across models and seeds.}\label{tab:classes}
+\begin{tabular}{lrrrr}\toprule
+Class & Positive bins & Mean & Attention & Always positive \\\midrule
+drums & 2040/2120 & 0.979 & 0.983 & 0.981 \\
+bass & 2023/2120 & 0.976 & 0.981 & 0.977 \\
+guitar & 1395/2120 & 0.765 & 0.751 & 0.794 \\
+piano & 1697/2120 & 0.889 & 0.889 & 0.889 \\
+\bottomrule\end{tabular}\end{table}
+
+\begin{table}[htbp]\centering\small
+\caption{Post-hoc threshold sensitivity, averaged across seeds. Main results use the zero-offset row.}\label{tab:sensitivity}
+\begin{tabular}{lrrr}\toprule
+Model & Offset & Frame micro-F1 & Frame macro-F1 \\\midrule
+mean & -0.10 & 0.914 & 0.908 \\
+mean & +0.00 & 0.910 & 0.902 \\
+mean & +0.10 & 0.887 & 0.874 \\
+attention & -0.10 & 0.918 & 0.912 \\
+attention & +0.00 & 0.910 & 0.901 \\
+attention & +0.10 & 0.843 & 0.808 \\
+\bottomrule\end{tabular}\end{table}
